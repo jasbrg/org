@@ -1,0 +1,11 @@
+#+title: Calendar
+#+todo: FUTURE PRESENT | PAST
+
+* FUTURE 28th Birthday                                                :event:
+DEADLINE: <2022-08-17 Wed -1y>
+
+# Local Variables:
+# org-hugo-export-with-section-numbers: nil
+# org-hugo-section: "/"
+# org-hugo-base-dir: "~/Public/blog/"
+# End:

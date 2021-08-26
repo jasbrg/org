@@ -1,0 +1,7 @@
+.DS_Store
+*.pdf
+*.odt
+*.tex
+*.txt
+*.jpeg
+/self/

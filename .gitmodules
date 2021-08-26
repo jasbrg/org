@@ -1,0 +1,9 @@
+[submodule "sylph"]
+	path = sylph
+	url = ./sylph/
+[submodule "lumbook"]
+	path = lumbook
+	url = ./lumbook/
+[submodule "lumanu.local"]
+	path = lumanu.local
+	url = ./lumanu.local/

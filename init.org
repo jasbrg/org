@@ -1,0 +1,936 @@
+* Init dot El
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ~/.emacs.d/init.el
+:header-args:emacs-lisp+: :comments link
+:END:
+
+** Initial Setup
+
+#+begin_src emacs-lisp :comments none
+; -*- auto-save-hook: org-babel-detangle; -*-
+#+end_src
+
+#+begin_src emacs-lisp
+;;; init.el starts here
+
+(setq user-full-name "Jacob Sonnenberg"
+      custom-file "~/.emacs.d/lisp/custom.el")
+
+(load (file-truename "~/.emacs.d/bootstrap-straight.el"))
+
+(straight-use-package 'straight)
+(straight-use-package 'use-package)
+
+(load custom-file)
+
+(use-package use-package-ensure-system-package
+  :straight t
+  :custom (system-packages-package-manager "nix"))
+
+(use-package server
+  :config
+  (unless (server-running-p)
+    (server-start)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Basic
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package emacs
+  :demand t
+  :bind (("C-c o i" . my/org-init)
+         ("C-c o s" . my/src)
+         ("C-c %" . query-replace))
+  :hook ((text-mode) . auto-fill-mode)
+  :config
+  (defun my/org-init () (interactive) (find-file "~/org/init.org"))
+  (defun my/init () (interactive) (find-file "~/.emacs.d/init.el"))
+  (defun my/src () (interactive) (find-file "~/src/"))
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (setq inhibit-startup-screen t)
+  :custom
+  (auto-save-file-name-transforms '((".*" "~/.emacs.d/cache/autosave/" t)))
+  (backup-directory-alist '(("." . "~/.emacs.d/cache/backup/")))
+  (blink-cursor-blinks 0)
+  (blink-cursor-delay 0.2)
+  (blink-cursor-interval 0.2)
+  (column-number-mode t)
+  (cursor-type 'box)
+  (global-hl-line-mode t)
+  (global-hl-line-sticky-flag t)
+  (indent-tabs-mode nil)
+  (indicate-buffer-boundaries t)
+  (indicate-empty-lines t)
+  (lisp-indent-function #'lisp-indent-function)
+  (mouse-wheel-follow-mouse t)
+  (mouse-wheel-progressive-speed nil)
+  (mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+  (same-window-regexps (list (rx bol "*" (? "e") "shell*" (* anything))))
+  (scroll-bar-mode nil)
+  (scroll-conservatively 100)
+  (scroll-step 1)
+  (sentence-end-double-space nil)
+  (tab-width 4)
+  (tool-bar-mode nil)
+  (uniquify-buffer-name-style 'forward)
+  (word-wrap t)
+  (ring-bell-function 'ignore)
+  (visible-bell nil))
+#+end_src
+
+** Display
+
+#+begin_src emacs-lisp
+(use-package delight
+  :straight t :demand t
+  :init
+  (delight 'auto-fill-function " AF" t))
+
+(use-package rainbow-mode
+  :straight t)
+
+(use-package base16-theme
+  :straight t :demand t
+  :config
+  (setq base16-highlight-mode-line 'box)
+  (load-theme 'base16-grayscale-dark t)
+  :custom-face
+  (mode-line-inactive ((t (:box t)))))
+#+end_src
+
+** Discoverability
+
+#+begin_src emacs-lisp
+(use-package ripgrep
+  ;; :ensure-system-package ripgrep
+  :straight t)
+
+(use-package which-key
+  :straight t
+  :config (which-key-mode +1))
+
+(use-package hi-lock
+  :bind (("C-x x h" . highlight-symbol-at-point)
+         ("C-x x H" . hi-lock-mode)))
+
+(use-package display-line-numbers
+  :bind (("C-x x L" . global-display-line-numbers-mode)
+         ("C-x x l" . display-line-numbers-mode))
+  :config
+  (defun display-line-numbers-mode-off ()
+    (interactive)
+    (display-line-numbers-mode -1)))
+#+end_src
+
+*** Helm
+
+#+begin_src emacs-lisp
+(use-package helm
+  :straight t :demand t
+  :delight " *"
+  :bind (("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files)
+         ("C-x b" . helm-buffers-list)
+         ("M-y" . helm-show-kill-ring)
+         ("C-c h a" . helm-apropos))
+  :custom
+  (helm-display-function 'helm-default-display-buffer)
+  (helm-display-buffer-reuse-frame t)
+  (helm-use-undecorated-frame-option t)
+  (helm-split-window-default-side 'below)
+  (helm-truncate-lines t)
+  (helm-split-window-inside-p t)
+  :config (helm-mode t)
+  (add-hook 'helm-top-after-init-hook
+            #'toggle-truncate-lines))
+
+(use-package helm-bibtex
+  :straight t
+  :bind (("C-c o TAB" . 'helm-bibtex))
+  :config
+  (setq bibtex-completion-notes-path org-directory
+        bibtex-completion-bibliography
+        '("~/org/sylph/bibliography.org")
+        bibtex-completion-library-path
+        '("~/Documents/Books" "~/Documents/Papers")
+        bibtex-completion-find-additional-pdfs t
+        bibtex-completion-pdf-extension
+        '(".pdf" ".epub")))
+
+(use-package helm-lsp :straight t
+  :commands helm-lsp-workspace-symbol)
+
+(use-package helm-unicode
+  :straight t :after helm
+  :bind (("C-x 8 RET" . helm-unicode)))
+
+(use-package helm-cider
+  :after helm
+  :straight t)
+
+(use-package helm-company
+  :straight t
+  :bind (:map company-mode-map
+              ("C-M-i" . helm-company)))
+#+end_src
+
+** Documentation
+
+#+begin_src emacs-lisp
+;; Fails for autoreconf. Installed automake, but it didn't take...
+;; (use-package pdf-tools
+;;   :straight t
+;;   :config
+;;   (pdf-tools-install)
+;;   :custom
+;;   (pdf-view-use-scaling t))
+
+(use-package eldoc
+  :delight ""
+  :hook ((emacs-lisp-mode cider-mode cider-repl-mode)
+         . eldoc-mode))
+
+(use-package nov
+  :straight t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+  (defun nov-text-scale-up ()
+    (interactive)
+    (set-face-attribute 'variable-pitch nil
+                        :height (+ 10 (face-attribute 'variable-pitch :height))))
+  (defun nov-text-scale-down ()
+    (interactive)
+    (set-face-attribute 'variable-pitch nil
+                        :height (- (face-attribute 'variable-pitch :height) 10)))
+  :bind (:map nov-mode-map
+              ("C-c C--" . nov-text-scale-down)
+              ("C-c C-=" . nov-text-scale-up)))
+
+(use-package woman)
+#+end_src
+
+** Movements
+
+#+begin_src emacs-lisp
+(use-package expand-region
+  :straight t
+  :bind (("C-=" . 'er/expand-region)))
+
+(use-package subword
+  :delight ""
+  :hook ((clojure-mode cider-repl-mode)
+         . subword-mode))
+
+(use-package avy
+  :straight t
+  :bind (("C-c c" . avy-goto-char-timer)))
+
+(use-package ace-window
+  :straight t
+  :bind (("C-x o" . other-window)
+         ("M-'" . other-window)
+         ("C-c w" . ace-window))
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
+        aw-scope 'visible))
+#+end_src
+
+** Integration
+
+*** Database
+
+#+begin_src emacs-lisp
+(use-package sql
+  :bind (("C-c Q c" . sql-connect))
+  :custom
+  (sql-connection-alist
+   '((org-roam
+      (sql-product 'sqlite)
+      (sql-database "~/.emacs.d/org-roam.db"))
+     (magit-forge
+      (sql-product 'sqlite)
+      (sql-database "~/.emacs.d/forge-database.sqlite")))))
+
+(use-package sqlformat
+  :straight t
+  :bind (:map org-mode-map
+              ("C-c q f" . 'sqlformat)
+         :map sql-mode-map
+              ("C-c f" . 'sqlformat)
+              ("C-c F" . 'sqlformat-buffer))
+  :custom (sqlformat-command 'pgformatter))
+#+end_src
+
+*** File System
+
+#+begin_src emacs-lisp
+(use-package bookmark
+  :demand t
+  :custom-face
+  (bookmark-face ((t (:inherit hl-line :extend nil :foreground nil :background nil)))))
+
+(use-package dired
+  :config
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode)
+  :custom
+  (dired-listing-switches "-lhF"))
+
+(use-package treemacs
+  :straight t
+  :bind (("C-c T" . 'treemacs)
+         ("C-c t" . 'treemacs-select-window))
+  :hook ((treemacs-mode) . display-line-numbers-mode-off)
+  :custom
+  (treemacs-sorting 'mod-time-desc))
+#+end_src
+
+**** Project Management
+
+#+begin_src emacs-lisp
+(use-package projectile
+  :straight t
+  :bind ("C-c p" . 'projectile-command-map))
+
+(use-package treemacs-projectile
+  :straight t)
+
+(use-package helm-projectile
+  :straight t)
+#+end_src
+
+**** Version Control
+
+#+begin_src emacs-lisp
+(use-package magit
+  :straight t
+  :bind (("C-c g" . magit-status))
+  :custom
+  (magit-section-initial-visibility-alist
+   '(([* status] . hide)))
+  (magit-section-cache-visibility t))
+
+(use-package forge
+  :straight t :after magit
+  :config (add-hook 'forge-post-mode-hook
+                    (lambda () (auto-fill-mode -1))))
+
+(use-package ediff
+  :custom
+  (ediff-merge-split-window-function 'split-window-vertically)
+  (ediff-window-setup-function 'ediff-setup-windows-plain)
+  (ediff-window-setup-function 'ediff-setup-windows-plain))
+
+(use-package treemacs-magit
+  :straight t)
+
+(use-package git-auto-commit-mode
+  :straight t
+  :delight " AUTOCOMMIT")
+#+end_src
+
+*** Text
+
+#+begin_src emacs-lisp
+(use-package ispell
+  :custom
+  (ispell-program-name "ispell")
+  :bind (("C-c s" . ispell-word)
+         ("C-c S" . ispell)))
+
+(use-package flyspell
+  :hook ((org-mode) . flyspell-mode-on))
+#+end_src
+
+**** YAML
+
+#+begin_src emacs-lisp
+(use-package yaml-mode :straight t)
+#+end_src
+
+**** Markdown
+
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :straight t)
+#+end_src
+
+**** HTML
+
+#+begin_src emacs-lisp
+(use-package restclient :straight t)
+
+(use-package web-mode :straight t
+  :hook ((html-mode)
+         . web-mode)
+  :custom
+  (web-mode-enable-auto-indentation nil)
+  (web-mode-code-indent-offset 2))
+#+end_src
+
+**** Ledger
+
+#+begin_src emacs-lisp
+(use-package ledger-mode
+  :straight t)
+#+end_src
+
+**** Org
+
+#+begin_src emacs-lisp
+(use-package org
+  :bind (("C-c o c" . org-capture)
+         ("C-c o a" . org-agenda)
+         ("C-c o l" . org-store-link)
+         ("C-c o o" . (lambda () (interactive) (dired "~/org"))))
+  :custom
+  (org-export-allow-bind-keywords t)
+  (org-clock-out-remove-zero-time-clocks t)
+  (org-agenda-span 'day)
+  (org-capture-templates
+   '(("t" "TODO" entry (file "~/org/todo.org")
+      "* TODO %?\n"
+      :prepend t)
+     ("f" "Feed" entry (file+headline "~/org/feeds.org" "Feeds")
+      "* %?"
+      :prepend t)))
+  :custom-face
+  (org-link ((t (:underline t))))
+  (org-drawer ((t (:inherit org-special-keyword))))
+  (org-headline-todo ((t (:foreground "systemBlueColor"))))
+  (org-headline-done ((t (:foreground "systemOrangeColor"))))
+  :config
+  (use-package ol-bibtex)
+  (setq
+   org-fontify-todo-headline t
+   org-adapt-indentation nil
+   org-edit-src-content-indentation 0
+   org-src-preserve-indentation t
+   org-src-window-setup 'current-window
+   org-src-tab-acts-natively t
+   org-src-fontify-natively t
+   org-todo-keywords
+   '((sequence "TODO" "|" "DONE")
+     (sequence "|" "CANCELED")))
+  ;; Where's this coming from...
+  (remove-hook 'org-mode-hook 'org))
+
+(use-package org-crypt
+  :config
+  (org-crypt-use-before-save-magic)
+  (setq org-tags-exclude-from-inheritance '("crypt")
+	    org-crypt-key nil))
+
+;; (use-package org-tree-slide
+;;   :straight t
+;;   :custom
+;;   (org-tree-slide-slide-in-effect nil))
+#+end_src
+
+***** Export
+
+#+begin_src emacs-lisp
+(use-package ox-md :after org)
+
+(use-package ox-org :after org)
+
+(use-package ox-hugo :straight t :after org)
+
+(use-package easy-hugo
+  :straight t
+  :bind (("C-c o h" . 'easy-hugo)
+         ("C-c o b" . (lambda ()
+                        (interactive) (find-file "~/org/sylph/blog.org"))))
+  :custom
+  (easy-hugo-basedir "~/Public/blog/")
+  (easy-hugo-postdir "content/posts"))
+
+(use-package ox-gfm
+  :straight t :after org)
+#+end_src
+
+***** Babel
+
+#+begin_src emacs-lisp
+(use-package ob
+  :after org
+  :init
+  (use-package ob-async :straight t)
+  (use-package ob-restclient :straight t)
+  (use-package ob-go :straight t)
+  (use-package ob-clojure
+    :custom
+    (org-babel-clojure-backend 'cider))
+  (use-package ob-sql)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((shell . t)
+     (restclient . t)
+     (sql . t)
+     (clojure . t))))
+#+end_src
+
+***** Roam
+
+#+begin_src emacs-lisp
+(use-package org-roam
+  :straight t
+  :init (setq org-roam-v2-ack t)
+  :config
+  (add-to-list 'org-default-properties "ROAM_ALIASES")
+  (add-to-list 'org-default-properties "ROAM_REFS")
+  (add-to-list 'org-default-properties "ROAM_EXCLUDE")
+  :custom
+  (org-roam-capture-templates
+   `(("d" "default" plain "%?"
+      :if-new (file+head "%<%Y-%m-%d>-${slug}.org"
+                         "#+date: %<%Y-%m-%d>\n#+title: ${title}\n#+export_file_name: %<%Y-%m-%d>-${slug}")
+      :unnarrowed t)))
+  (org-roam-dailies-capture-templates
+   `(("d" "default" entry
+      "* %<%H:%M> %?"
+      :if-new (file+head "%<%Y-%m-%d>.org"
+                         "#+title: %<%Y-%m-%d>\n"))))
+  :bind (("C-c o r" . (lambda ()
+                        (interactive)
+                        (dired org-roam-directory)))
+         ("C-c n c" . org-roam-capture)
+         ("C-c n C" . org-id-get-create)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n u" . org-roam-db-sync)
+         ("C-c n U" . org-roam-update-org-id-locations)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today)
+         ("C-c n d" . org-roam-dailies-capture-date)
+         ;; References
+         ("C-c n r a" . org-roam-ref-add)
+         ("C-c n r f" . org-roam-ref-find)
+         ("C-c n r d" . org-roam-ref-remove)
+         ;; Tags
+         ("C-c n t a" . org-roam-tag-add)
+         ("C-c n t d" . org-roam-tag-remove)))
+
+(use-package org-roam-protocol
+  :custom
+  (org-roam-capture-ref-templates
+   '(("r" "ref" plain "%?" :target
+      (file+head "%<%Y-%m-%d>-${slug}.org"
+		         "#+date: %<%Y-%m-%d>\n#+title: ${title}\n#+export_file_name: %<%Y-%m-%d>-${slug}\n#+filetags: inbox")
+      :unnarrowed t
+      :immediate-finish t))))
+
+(use-package org-roam-bibtex
+  :straight t
+  :after (org-roam helm-bibtex)
+  :bind (:map org-mode-map ("C-c n b" . orb-note-actions))
+  :config
+  (require 'org-ref))
+
+(use-package org-ref
+  :straight t
+  :custom
+  (org-ref-completion-library 'org-ref-helm-cite)
+  (org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex)
+  (org-ref-default-bibliography "~/org/sylph/bibliography.bib")
+  (org-ref-notes-directory org-directory)
+  (org-ref-notes-function 'orb-edit-notes)
+  (org-roam-node-display-template "${title:30} ${tags:15}"))
+
+(use-package orgit
+  :straight t)
+
+(use-package orgit-forge
+  :straight t)
+#+end_src
+
+*** Shell & Environment
+
+#+begin_src emacs-lisp
+(use-package exec-path-from-shell
+  :straight t
+  :config (exec-path-from-shell-initialize))
+
+(use-package vterm
+  ;; brew/port install cmake
+  ;; brew/port install libvterm
+  :straight t)
+#+end_src
+
+*** Prog
+
+#+begin_src emacs-lisp
+(use-package flycheck-mode
+  :hook ((clojure-mode clojurescript-mode)
+         . flycheck-mode))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package company
+  :straight t :delight " CMP"
+  :hook ((emacs-lisp-mode clojure-mode clojurescript-mode)
+         . company-mode-on)
+  :config
+  (setq company-idle-delay 0.3))
+
+(use-package company-quickhelp
+  :straight t
+  :bind (:map company-active-map
+              ("C-c h" . #'company-quickhelp-manual-begin))
+  :custom
+  (company-quickhelp-color-foreground "white")
+  (company-quickhelp-color-background "black"))
+#+end_src
+
+**** Language Server Protocol
+
+#+begin_src emacs-lisp
+(use-package lsp-mode :straight t
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook
+  ((go-mode . lsp)
+   (lsp-mode . lsp-enable-which-key-integration)))
+
+(use-package dap-mode :straight t
+  :config
+  (use-package dap-go))
+
+(use-package lsp-ui :straight t
+  :commands lsp-ui-mode)
+#+end_src
+
+**** Typescript
+
+#+begin_src emacs-lisp
+;; (use-package edit-indirect
+;;   :straight t)
+
+(use-package mmm-mode
+  :straight t
+  :custom
+  (mmm-submode-decoration-level 0)
+  :config
+  ;; https://gist.github.com/rangeoshun/67cb17392c523579bc6cbd758b2315c1
+  ;; Add css mode for CSS in JS blocks
+  (mmm-add-classes
+   '((mmm-styled-mode
+      :submode css-mode
+      :front "\\(styled\\|css\\)[.()<>[:alnum:]]?+`"
+      :back "`;")))
+  (mmm-add-mode-ext-class 'typescript-mode nil 'mmm-styled-mode)
+  ;; Add submodule for graphql blocks
+  (mmm-add-classes
+   '((mmm-graphql-mode
+      :submode graphql-mode
+      :front "gr?a?p?h?ql`"
+      :back "`;")))
+  (mmm-add-mode-ext-class 'typescript-mode nil 'mmm-graphql-mode)
+  ;; Add JSX submodule, because typescript-mode is not that great at it
+  (mmm-add-classes
+   '((mmm-jsx-mode
+      :front "\\(return\s\\|n\s\\|(\n\s*\\)<"
+      :front-offset -1
+      :back ">\n?\s*)"
+      :back-offset 1
+      :submode web-mode)))
+  (mmm-add-mode-ext-class 'typescript-mode nil 'mmm-jsx-mode)
+  (defun mmm-reapply ()
+    (mmm-mode)
+    (mmm-mode))
+  (add-hook 'after-save-hook
+            (lambda ()
+              (when (string-match-p "\\.tsx?" buffer-file-name)
+                (mmm-reapply)))))
+
+(use-package graphql-mode
+  :straight t)
+
+(use-package typescript-mode
+  :straight t
+  :custom
+  (typescript-indent-level 2)
+  :hook
+  ((typescript-mode . mmm-mode-on)
+   (typescript-mode . tide-mode)))
+
+(use-package tide
+  :straight t)
+#+end_src
+
+**** Go
+
+#+begin_src emacs-lisp
+(use-package go-mode
+  :straight t
+  :config
+  (add-hook 'go-mode-hook 'electric-pair-local-mode)
+  ;; (add-hook 'go-mode-hook 'eglot)
+  (add-hook 'go-mode-hook 'company-mode)
+  (add-hook 'go-mode-hook 'yas-minor-mode-on))
+#+end_src
+
+**** Scala
+
+#+begin_src emacs-lisp
+(use-package scala-mode :straight t)
+
+(use-package sbt-mode :straight t
+  :commands sbt-start sbt-command)
+#+end_src
+
+**** Python
+
+#+begin_src emacs-lisp
+(use-package elpy
+  :straight t
+  :init (elpy-enable)
+  :config
+  (setq elpy-rpc-python-command "python3"
+	    python-shell-interpreter "python3"))
+#+end_src
+
+**** JavaScript
+
+#+begin_src emacs-lisp
+(use-package json-mode :straight t)
+#+end_src
+
+**** Lisp
+
+#+begin_src emacs-lisp
+(use-package paren
+  :config
+  (show-paren-mode +1)
+  :custom
+  (show-paren-style 'expression))
+
+(use-package paredit
+  :straight t
+  :bind (("C-M-q" . prog-indent-sexp))
+  :delight " ()"
+  :hook ((emacs-lisp-mode clojure-mode cider-repl-mode lisp-data-mode)
+         . enable-paredit-mode))
+#+end_src
+
+***** Emacs Lisp
+
+#+begin_src emacs-lisp
+(use-package elisp-mode
+  :bind (:map emacs-lisp-mode-map
+	          ("C-c C-k" . 'eval-buffer)))
+#+end_src
+
+***** Common Lisp
+
+#+begin_src emacs-lisp
+(use-package slime
+  :straight t
+  :custom
+  (inferior-lisp-program "/usr/local/bin/sbcl"))
+#+end_src
+
+***** Scheme
+
+#+begin_src emacs-lisp
+(use-package racket-mode :straight t)
+
+(use-package geiser :straight t)
+
+(use-package quack :straight t)
+#+end_src
+
+***** Clojure
+
+#+begin_src emacs-lisp
+(use-package clojure-mode
+  :straight t)
+
+(use-package cider
+  :straight t :after clojure-mode
+  :custom-face
+  (cider-fringe-good-face ((t (:foreground "systemBlueColor"))))
+  (cider-result-overlay-face ((t (:box (:line-width (1 . -1) :color "systemBlueColor")))))
+  ;; :ensure-system-package (jdk11)
+  :config
+  (setq
+   clojure-align-forms-automatically t
+   clojure-indent-style :align-arguments
+   cider-enrich-classpath t))
+
+(use-package flycheck-clj-kondo
+  :straight t)
+
+(use-package nrepl-client
+  :config
+  (add-hook 'nrepl-connected-hook 'cider-enable-on-existing-clojure-buffers))
+
+(use-package clj-refactor
+  :straight t :after clojure-mode)
+#+end_src
+
+** Host Specific
+
+#+begin_src emacs-lisp
+(cl-case system-type
+  ('darwin (load "~/.emacs.d/host/mac.el"))
+  ('gnu/linux (load "~/.emacs.d/host/linux.el")))
+
+(load (format "~/.emacs.d/host/%s.el" (system-name)))
+
+(use-package org-roam
+  :custom
+  (org-roam-directory (format "~/org/%s/roam/" (system-name))))
+#+end_src
+
+*** Mac
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ~/.emacs.d/host/mac.el
+:header-args:emacs-lisp+: :comments link
+:END:
+
+#+begin_src emacs-lisp
+(use-package prog-mode
+  :bind (:map prog-mode-map
+	      ("s-<tab>" . prog-indent-sexp)))
+
+;; Switched caps-lock and control at the system level
+(setq mac-command-modifier 'meta
+      mac-option-modifier 'super)
+
+(use-package osx-dictionary
+  :straight t
+  :bind (("C-c d" . 'osx-dictionary-search-word-at-point)
+         ("C-c D" . 'osx-dictionary-search-input)))
+#+end_src
+
+*** Sylph
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ~/.emacs.d/host/sylph.el
+:header-args:emacs-lisp+: :comments link
+:END:
+
+#+begin_src emacs-lisp
+(setq user-mail-address "jasbrg@gmail.com")
+
+(use-package emacs
+  :config
+  (set-face-attribute
+   'default nil :family "Iosevka Custom" :height 130 :weight 'regular)
+  (set-face-attribute
+   'fixed-pitch nil :family "Iosevka Custom" :height 130 :weight 'regular)
+  (set-face-attribute
+   'variable-pitch nil :family "Iosevka Etoile" :height 130 :weight 'regular))
+
+(use-package prog-mode
+  :bind (:map prog-mode-map
+	          ("s-<tab>" . prog-indent-sexp)))
+
+(use-package ispell
+  :bind (("s-;" . ispell-word)
+         ("C-c SPC" . just-one-space))
+  :custom (ispell-program-name "ispell"))
+
+(use-package ox-publish
+  :custom
+  (org-publish-project-alist
+   '(("site"
+      :base-directory "~/org/site/"
+      :publishing-function org-html-publish-to-html
+      :publishing-directory "~/Public/site/"
+      :section-numbers nil
+      :with-toc nil
+      :makeindex t
+      :auto-sitemap t :sitemap-filename "sitemap.org"
+      :recursive t
+      :html-head "<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\"/>"
+      :html-preamble t))))
+
+(use-package erc
+  :custom
+  (erc-hide-list '("JOIN" "PART" "QUIT"))
+  (erc-insert-timestamp-function 'erc-insert-timestamp-left)
+  (erc-timestamp-only-if-changed-flag nil)
+  (erc-fill-column 75)
+  (erc-timestamp-format "[%H:%M] ")
+  (erc-fill-prefix      "      + "))
+
+(use-package ox-publish
+  :custom
+  (org-publish-project-alist
+   '(("site"
+      :base-directory "~/org/site/"
+      :publishing-function org-html-publish-to-html
+      :publishing-directory "~/Public/site/"
+      :section-numbers nil
+      :with-toc nil
+      :makeindex t
+      :auto-sitemap t :sitemap-filename "sitemap.org"
+      :recursive t
+      :html-head "<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\"/>"
+      :html-preamble t))))
+
+(use-package ispell
+  :custom (ispell-program-name "/opt/local/bin/aspell"))
+
+(use-package holy-books :straight t)
+
+(use-package ledger-mode
+  :straight t)
+
+;; Fun idea but not too practical because the agenda opens all `org-agenda-files'
+;; (add-to-list 'org-agenda-files org-roam-directory)
+
+(use-package elfeed :straight t)
+
+(use-package elfeed-org
+  :straight t
+  :custom
+  (rmh-elfeed-org-files '("~/org/feeds.org")))
+
+(use-package org-agenda
+  :custom
+  (org-agenda-files '("~/org/sylph/history.org"
+                      "~/org/sylph/calendar.org"
+                      "~/org/todo.org")))
+#+end_src
+
+*** Lumanu Local
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ~/.emacs.d/host/lumanu.local.el
+:header-args:emacs-lisp+: :comments link
+:END:
+
+#+begin_src emacs-lisp
+(setq user-mail-address "jacob.sonnenberg@lumanu.com")
+
+(use-package emacs
+  :config
+  (setenv "JAVA_HOME" "/usr/local/opt/openjdk@11"))
+
+(defun lumanu/all-the-things ()
+  (interactive)
+  (async-shell-command
+   "cd ~/code/lumanu/ic/ && lein sass4clj auto"
+   "*sass4clj*")
+  (async-shell-command
+   "cd ~/code/lumanu/ic/ && npx postcss resources/css/app2.css resources/css/app-admin.css resources/css/socialcert-me.css resources/css/lumanu-signin.css --dir resources/public/css -w"
+   "*postcss*")
+  (async-shell-command
+   "cd ~/code/lumanu/ic/lambda-functions && sam build && sam local start-lambda"
+   "*sam-lambda*")
+  (async-shell-command
+   "cd ~/code/lumanu/ic/ && ../bin/db-tunnel dev-jsonnenberg"
+   "*psql_dev*")
+  ;; run ngrok in vterm because it's weird
+  ;; (vterm "ngrok start --all")
+  )
+
+(set-face-attribute
+ 'default nil :family "Monaco" :height 150 :weight 'regular)
+
+(set-face-attribute
+ 'fixed-pitch nil :family "Monaco" :height 150 :weight 'regular)
+
+(set-face-attribute
+ 'variable-pitch nil :family "Iosevka Etoile" :height 150 :weight 'regular)
+#+end_src

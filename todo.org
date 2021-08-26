@@ -1,0 +1,119 @@
+#+startup: overview
+#+todo: TODO(t) | DONE(d)
+#+todo: | CANCELLED(c)
+* TODO add plaid webhook as 
+
+#+begin_example
+https://<staging environment url>/api/payments/plaid/webhook
+#+end_example
+
+check out env.ts...
+
+it's already in there? we probably overlooked that it was set on
+staging rather than just how it works locally
+* TODO install SSM client
+* TODO set default text editor to emacsclient
+* TODO improve modeline                                               :emacs:
+i want to more easily see what task I'm clocked into
+* TODO [#C] org-babel-detangle-here                               :emacs:org:
+For my hacky little literate configuration sync thing, it would be
+useful if the detangle function did not focus kick back to the org
+file, because i like to save after every thought, and the best way to
+keep src<->org in sync is continually relaying the changes to the
+counter part. 
+
+Already caught that I was using the wrong variable to effectuate this,
+now it's correct in =init.el=
+
+#+begin_src emacs-lisp
+; -*- after-save-hook: org-babel-detangle; -*-
+#+end_src
+
+Something like this, I imagined this would work but doesn't seem to.
+Wonder why...
+
+#+begin_src emacs-lisp
+(defun org-babel-detangle-here ()
+  (interactive)
+  (save-excursion
+    (org-babel-detangle)))
+#+end_src
+
+* TODO [#C] configure global-display-lines-mode                       :emacs:
+
+even if i don't use it often the times i do working with someone,
+there are some buffers that would be improved by exclusion from the
+minor mode. shell buffers for example, typically have a lot of output
+and not much is gained from knowing what particular line you're on
+except the last. (and at that point just M-> if you need it)[fn:1]
+* TODO [#C] issue with cider-inspect                                  :emacs:
+
+#+begin_example
+nrepl-send-sync-request: Sync nREPL request timed out (ns lumanu.service.payment.impl op eval code (p-token/for-token "oLa5GdF7oePKEA/UXgAUMZZiN7Yi3WSaQXna6RG+2wPwE3ojB8xApnja/Jgxp+pNM7yWywMzT+E=") inspect true page-size 32 max-atom-length 150 max-coll-size 5)
+#+end_example
+
+* TODO [#C] sexp word count command                                   :emacs:
+* TODO [#C] make nutrition facts snippet                              :emacs:
+
+- Note taken on [2022-01-09 Sun 12:17] \\
+  foodnoms is nice for recording
+#+begin_src org
+,*** nutrition facts
+
++ serving size :: 
++ servings per container ::
++ amount per serving ::
+  + calories ::
+  + calories from fat ::
+  + total fat ::
+  + cholesterol ::
+  + sodium ::
+  + total carbohydrate ::
+  + protein :: 
+
+#+end_src
+
+* TODO [#C] org-roam key ref rendering                           :task:emacs:
+
+if a note is empty, but has a roam_ref, the roam_ref should be
+rendered as the link directly when viewed as html
+
+it may be done on the [[id:7DE4B88F-4DEA-467D-826D-97691789415B][Hugo]] side of things...
+
+* TODO [#C] org-mode function for recording the end of a streak       :emacs:
+
+there is also org-habit, but i think a simple table with the record
+start, end, and length in days is sufficient
+* TODO [#C] limit org roam protocol file length                       :emacs:
+
+getting this error:
+
+#+begin_example
+after-find-file: Getting attributes: File name too long, /Users/jasbrg/.emacs.d/cache/autosave/#!Users!jasbrg!Library!Mobile Documents!iCloud~com~appsonthemove~beorg!Documents!org!sylph!roam!2021-11-28-github_udem_dlteam_ribbit_a_small_and_portable_scheme_implementation_with_aot_and_incremental_compilers_that_fits_in_4k_it_supports_closures_tail_calls_first_class_continuations_and_a_repl.org#
+#+end_example
+
+dunno the specific limit but it can be worked around
+* TODO [#C] hide roam files from buffers list                         :emacs:
+
+using them in the agenda fills up the buffers list in an ugly way.
+they shouldn't be accessed through the buffers list anyway but with
+the specialized function ~org-roam-node-find~
+* TODO [#C] holy-books add helm completion                            :emacs:
+* TODO [#C] hugo auto TOC                                       :emacs:hobby:
+
+if a page is very long, it would be convenient to insert a table of
+contents. with hugo templates this could be automatically done,
+potentially.
+* TODO [#C] ox-hugo #+filetags                                  :emacs:hobby:
+
+it doesn't seem that ox-hugo respects TOP LEVEL filetags for that
+particular sorting ontology. it would integrate better with roam if it did.
+* TODO [#C] fix stub link exports                                     :emacs:
+
+using ox-hugo, if a link doesn't exist the hugo preview function won't
+work with the REF_NOT_FOUND error. it would be better behavior to
+strip non-existant links. or perhaps automatically exporting those
+files as well, (particularly if it's in ROAM)
+* Footnotes
+
+[fn:1] don't forget registers/bookmarks! they're handy 
