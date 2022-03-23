@@ -306,7 +306,7 @@
   :bind (("C-c g" . magit-status))
   :custom
   (magit-section-initial-visibility-alist
-   ((stashes . hide)))
+   '((stashes . hide)))
   ;;  '(([* status] . hide)))
   (magit-section-cache-visibility t))
 
