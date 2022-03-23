@@ -920,7 +920,7 @@
   (setenv "JAVA_HOME" "/usr/local/opt/openjdk@11"))
 
 (set-face-attribute
- 'default nil :family "Iosevka Custom" :height 140 :weight 'regular)
+ 'default nil :family "Iosevka Custom" :height 150 :weight 'regular)
 
 (set-face-attribute
  'fixed-pitch nil :family "Iosevka Custom" :height 140 :weight 'regular)
