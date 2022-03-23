@@ -359,7 +359,8 @@
   :straight t)
 
 (use-package mermaid-mode
-  :straight t)
+  :straight t
+  :ensure-system-package mermaid-mode-cli)
 #+end_src
 
 **** HTML
