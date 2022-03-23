@@ -357,6 +357,9 @@
 #+begin_src emacs-lisp
 (use-package markdown-mode
   :straight t)
+
+(use-package mermaid-mode
+  :straight t)
 #+end_src
 
 **** HTML
