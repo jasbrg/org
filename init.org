@@ -912,24 +912,6 @@
   :config
   (setenv "JAVA_HOME" "/usr/local/opt/openjdk@11"))
 
-(defun lumanu/all-the-things ()
-  (interactive)
-  (async-shell-command
-   "cd ~/code/lumanu/ic/ && lein sass4clj auto"
-   "*sass4clj*")
-  (async-shell-command
-   "cd ~/code/lumanu/ic/ && npx postcss resources/css/app2.css resources/css/app-admin.css resources/css/socialcert-me.css resources/css/lumanu-signin.css --dir resources/public/css -w"
-   "*postcss*")
-  (async-shell-command
-   "cd ~/code/lumanu/ic/lambda-functions && sam build && sam local start-lambda"
-   "*sam-lambda*")
-  (async-shell-command
-   "cd ~/code/lumanu/ic/ && ../bin/db-tunnel dev-jsonnenberg"
-   "*psql_dev*")
-  ;; run ngrok in vterm because it's weird
-  ;; (vterm "ngrok start --all")
-  )
-
 (set-face-attribute
  'default nil :family "Monaco" :height 150 :weight 'regular)
 
