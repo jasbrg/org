@@ -323,7 +323,7 @@
 
 (use-package smerge-mode
   :custom
-  (smerge-command-prefix "m"))
+  (smerge-command-prefix (kbd "C-c m"))) 
 
 (use-package treemacs-magit
   :straight t)
