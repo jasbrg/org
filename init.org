@@ -25,7 +25,7 @@
 
 (use-package use-package-ensure-system-package
   :straight t
-  :custom (system-packages-package-manager "nix"))
+  :custom (system-packages-package-manager "brew"))
 
 (use-package server
   :config
