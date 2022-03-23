@@ -923,7 +923,7 @@
  'default nil :family "Iosevka Custom" :height 150 :weight 'regular)
 
 (set-face-attribute
- 'fixed-pitch nil :family "Iosevka Custom" :height 140 :weight 'regular)
+ 'fixed-pitch nil :family "Iosevka Custom" :height 150 :weight 'regular)
 
 (set-face-attribute
  'variable-pitch nil :family "Iosevka Etoile" :height 140 :weight 'regular)
