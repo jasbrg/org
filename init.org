@@ -401,8 +401,8 @@
   :custom-face
   (org-link ((t (:underline t))))
   (org-drawer ((t (:inherit org-special-keyword))))
-  (org-headline-todo ((t (:foreground "systemBlueColor"))))
-  (org-headline-done ((t (:foreground "systemOrangeColor"))))
+  (org-headline-done ((t (:foreground "systemBlueColor"))))
+  (org-headline-todo ((t (:foreground "systemOrangeColor"))))
   :config
   (use-package ol-bibtex)
   (setq
