@@ -913,10 +913,10 @@
   (setenv "JAVA_HOME" "/usr/local/opt/openjdk@11"))
 
 (set-face-attribute
- 'default nil :family "Monaco" :height 150 :weight 'regular)
+ 'default nil :family "Iosevka Custom" :height 150 :weight 'regular)
 
 (set-face-attribute
- 'fixed-pitch nil :family "Monaco" :height 150 :weight 'regular)
+ 'fixed-pitch nil :family "Iosevka Custom" :height 150 :weight 'regular)
 
 (set-face-attribute
  'variable-pitch nil :family "Iosevka Etoile" :height 150 :weight 'regular)
