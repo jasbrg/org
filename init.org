@@ -252,7 +252,7 @@
       (sql-database "~/.emacs.d/forge-database.sqlite")))))
 
 (use-package sqlformat
-  :straight t
+  :straight t :after sql
   :bind (:map org-mode-map
               ("C-c q f" . 'sqlformat)
          :map sql-mode-map
