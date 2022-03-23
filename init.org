@@ -361,6 +361,9 @@
 (use-package mermaid-mode
   ;:ensure-system-package mermaid-mode-cli
   :straight t)
+
+(use-package edit-indirect
+  :straight t)
 #+end_src
 
 **** HTML
