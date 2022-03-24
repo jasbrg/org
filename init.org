@@ -399,10 +399,10 @@
   (org-clock-out-remove-zero-time-clocks t)
   (org-agenda-span 'day)
   (org-capture-templates
-   '(("t" "TODO" entry (file "~/org/todo.org")
+   `(("t" "TODO" entry (file "~/org/todo.org")
       "* TODO %?\n"
       :prepend t)
-     ("T" "Local TODO" entry (file (format "~/org/%s/todo.org" system-name))
+     ("T" "Local TODO" entry (file ,(format "~/org/%s/todo.org" system-name))
       "* TODO %?\n"
       :prepend t)
      ("f" "Feed" entry (file+headline "~/org/feeds.org" "Feeds")
