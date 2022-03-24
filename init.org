@@ -918,6 +918,12 @@
 #+begin_src emacs-lisp
 (setq user-mail-address "jacob.sonnenberg@lumanu.com")
 
+(use-package org-agenda
+  :custom
+  (org-agenda-files '("~/org/lumanu.local/history.org"
+                      "~/org/lumanu.local/calendar.org"
+                      "~/org/lumanu.local/todo.org")))
+
 (use-package emacs
   :config
   (setenv "JAVA_HOME" "/usr/local/opt/openjdk@11"))
