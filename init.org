@@ -402,6 +402,9 @@
    '(("t" "TODO" entry (file "~/org/todo.org")
       "* TODO %?\n"
       :prepend t)
+     ("T" "Local TODO" entry (file (format "~/org/%s/todo.org" system-name))
+      "* TODO %?\n"
+      :prepend t)
      ("f" "Feed" entry (file+headline "~/org/feeds.org" "Feeds")
       "* %?"
       :prepend t)))
