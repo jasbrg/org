@@ -410,7 +410,7 @@
       :prepend t)))
   :custom-face
   (org-link ((t (:underline t))))
-  (org-meta-line ((t (:inherit default))))
+  (org-meta-line ((t (:inherit org-document-info-keyword))))
   (org-drawer ((t (:inherit org-special-keyword))))
   (org-headline-done ((t (:foreground "systemBlueColor"))))
   (org-headline-todo ((t (:foreground "systemOrangeColor"))))
