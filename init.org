@@ -580,7 +580,7 @@
 (use-package company
   :straight t :delight " CMP"
   :hook ((emacs-lisp-mode clojure-mode clojurescript-mode)
-         . company-mode-on)  
+         . company-mode-on)
   :config
   (setq company-idle-delay 0.3))
 
