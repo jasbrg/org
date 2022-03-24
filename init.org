@@ -906,7 +906,7 @@
   :custom
   (org-agenda-files '("~/org/sylph/history.org"
                       "~/org/sylph/calendar.org"
-                      "~/org/todo.org")))
+                      "~/org/sylph/todo.org")))
 #+end_src
 
 *** Lumanu Local
