@@ -966,7 +966,7 @@
       :html-preamble t))))
 
 (use-package ispell
-  :custom (ispell-program-name "/opt/local/bin/aspell"))
+  :custom (ispell-program-name "/opt/local/bin/ispell"))
 
 (use-package holy-books :straight t)
 
