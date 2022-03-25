@@ -78,6 +78,13 @@
   (visible-bell nil))
 #+end_src
 
+** Version Specific
+
+#+begin_src emacs-lisp
+(when (<= 29 emacs-major-version)
+  (pixel-scroll-precision-mode +1))
+#+end_src
+
 ** Display
 
 #+begin_src emacs-lisp
@@ -937,12 +944,5 @@
 
 (set-face-attribute
  'variable-pitch nil :family "Iosevka Etoile" :height 150 :weight 'regular)
-#+end_src
-
-** Version Specific
-
-#+begin_src emacs-lisp
-(when (<= 29 emacs-major-version)
-  (pixel-scroll-precision-mode +1))
 #+end_src
 
