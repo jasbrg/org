@@ -156,7 +156,6 @@
   :bind (("C-c o TAB" . 'helm-bibtex))
   :config
   (setq bibtex-completion-notes-path org-directory
-        
         bibtex-completion-library-path
         '("~/Documents/Books" "~/Documents/Papers")
         bibtex-completion-find-additional-pdfs t
