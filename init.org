@@ -78,7 +78,7 @@
   (visible-bell nil))
 #+end_src
 
-** Version Specific
+*** Version Specific
 
 #+begin_src emacs-lisp
 (when (<= 29 emacs-major-version)
