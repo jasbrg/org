@@ -156,8 +156,7 @@
   :bind (("C-c o TAB" . 'helm-bibtex))
   :config
   (setq bibtex-completion-notes-path org-directory
-        bibtex-completion-bibliography
-        '("~/org/sylph/bibliography.org")
+        
         bibtex-completion-library-path
         '("~/Documents/Books" "~/Documents/Papers")
         bibtex-completion-find-additional-pdfs t
@@ -915,6 +914,11 @@
   (org-agenda-files '("~/org/sylph/history.org"
                       "~/org/sylph/calendar.org"
                       "~/org/sylph/todo.org")))
+
+(use-package helm-bibtex
+  :custom
+  (bibtex-completion-bibliography
+   '("~/org/sylph/bibliography.org")))
 #+end_src
 
 *** Lumanu Local
