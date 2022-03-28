@@ -53,7 +53,7 @@
   (backup-directory-alist '(("." . "~/.emacs.d/cache/backup/")))
   (blink-cursor-blinks 0)
   (blink-cursor-delay 0.2)
-  (blink-cursor-interval 0.2)
+  (blink-cursor-interval 0.1)
   (column-number-mode t)
   (cursor-type 'box)
   (global-hl-line-mode t)
