@@ -77,7 +77,7 @@
   (ring-bell-function 'ignore)
   (visible-bell nil)
   :custom-face
-  (hl-line ((t (:inverse t)))))
+  (hl-line ((t (:box nil)))))
 #+end_src
 
 *** Version Specific
