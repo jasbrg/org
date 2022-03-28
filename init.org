@@ -131,7 +131,7 @@
     (display-line-numbers-mode -1)))
 #+end_src
 
-*** Helm
+*** Helm (completion framework)
 
 #+begin_src emacs-lisp
 (use-package helm
