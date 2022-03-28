@@ -197,7 +197,7 @@
   :hook ((emacs-lisp-mode cider-mode cider-repl-mode)
          . eldoc-mode))
 
-(use-package nov
+(use-package nov;.el
   :straight t
   :init
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
