@@ -75,7 +75,9 @@
   (uniquify-buffer-name-style 'forward)
   (word-wrap t)
   (ring-bell-function 'ignore)
-  (visible-bell nil))
+  (visible-bell nil)
+  :custom-face
+  (hl-line ((t (:inverse t)))))
 #+end_src
 
 *** Version Specific
