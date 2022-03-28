@@ -294,7 +294,8 @@
 #+begin_src emacs-lisp
 (use-package projectile
   :straight t
-  :bind ("C-c p" . 'projectile-command-map))
+  :bind ("C-c p" . 'projectile-command-map)
+  :custom (projectile-create-missing-test-files t))
 
 (use-package treemacs-projectile
   :straight t)
