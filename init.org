@@ -776,6 +776,7 @@
   (setq
    clojure-align-forms-automatically t
    clojure-indent-style :align-arguments
+   clojure-toplevel-inside-comment-form t
    cider-enrich-classpath t))
 
 (use-package flycheck-clj-kondo
