@@ -87,6 +87,168 @@
   (pixel-scroll-precision-mode +1))
 #+end_src
 
+** Host Specific
+
+#+begin_src emacs-lisp
+(cl-case system-type
+  ('darwin (load "~/.emacs.d/host/mac.el"))
+  ('gnu/linux (load "~/.emacs.d/host/linux.el")))
+
+(load (format "~/.emacs.d/host/%s.el" (system-name)))
+
+(use-package org-roam
+  :custom
+  (org-roam-directory (format "~/org/%s/roam/" (system-name))))
+#+end_src
+
+*** Mac
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ~/.emacs.d/host/mac.el
+:header-args:emacs-lisp+: :comments link
+:END:
+
+#+begin_src emacs-lisp
+(use-package prog-mode
+  :bind (:map prog-mode-map
+	      ("s-<tab>" . prog-indent-sexp)))
+
+;; Switched caps-lock and control at the system level
+(setq mac-command-modifier 'meta
+      mac-option-modifier 'super)
+
+(use-package osx-dictionary
+  :straight t
+  :bind (("C-c d" . 'osx-dictionary-search-word-at-point)
+         ("C-c D" . 'osx-dictionary-search-input)))
+#+end_src
+
+*** Sylph
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ~/.emacs.d/host/sylph.el
+:header-args:emacs-lisp+: :comments link
+:END:
+
+# Sylph = air
+
+#+begin_src emacs-lisp
+(setq user-mail-address "jasbrg@gmail.com")
+
+(use-package emacs
+  :config
+  (set-face-attribute
+   'default nil :family "Iosevka Custom" :height 130 :weight 'regular)
+  (set-face-attribute
+   'fixed-pitch nil :family "Iosevka Custom" :height 130 :weight 'regular)
+  (set-face-attribute
+   'variable-pitch nil :family "Iosevka Etoile" :height 130 :weight 'regular))
+
+(use-package prog-mode
+  :bind (:map prog-mode-map
+	          ("s-<tab>" . prog-indent-sexp)))
+
+(use-package ispell
+  :bind (("s-;" . ispell-word)
+         ("C-c SPC" . just-one-space))
+  :custom (ispell-program-name "ispell"))
+
+(use-package ox-publish
+  :custom
+  (org-publish-project-alist
+   '(("site"
+      :base-directory "~/org/site/"
+      :publishing-function org-html-publish-to-html
+      :publishing-directory "~/Public/site/"
+      :section-numbers nil
+      :with-toc nil
+      :makeindex t
+      :auto-sitemap t :sitemap-filename "sitemap.org"
+      :recursive t
+      :html-head "<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\"/>"
+      :html-preamble t))))
+
+(use-package erc
+  :custom
+  (erc-hide-list '("JOIN" "PART" "QUIT"))
+  (erc-insert-timestamp-function 'erc-insert-timestamp-left)
+  (erc-timestamp-only-if-changed-flag nil)
+  (erc-fill-column 75)
+  (erc-timestamp-format "[%H:%M] ")
+  (erc-fill-prefix      "      + "))
+
+(use-package ox-publish
+  :custom
+  (org-publish-project-alist
+   '(("site"
+      :base-directory "~/org/site/"
+      :publishing-function org-html-publish-to-html
+      :publishing-directory "~/Public/site/"
+      :section-numbers nil
+      :with-toc nil
+      :makeindex t
+      :auto-sitemap t :sitemap-filename "sitemap.org"
+      :recursive t
+      :html-head "<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\"/>"
+      :html-preamble t))))
+
+(use-package ispell
+  :custom (ispell-program-name "/opt/local/bin/aspell"))
+
+(use-package holy-books :straight t)
+
+(use-package ledger-mode
+  :straight t)
+
+;; Fun idea but not too practical because the agenda opens all `org-agenda-files'
+;; (add-to-list 'org-agenda-files org-roam-directory)
+
+(use-package elfeed :straight t)
+
+(use-package elfeed-org
+  :straight t
+  :custom
+  (rmh-elfeed-org-files '("~/org/feeds.org")))
+
+(use-package org-agenda
+  :custom
+  (org-agenda-files '("~/org/sylph/history.org"
+                      "~/org/sylph/calendar.org"
+                      "~/org/sylph/todo.org")))
+
+(use-package helm-bibtex
+  :custom
+  (bibtex-completion-bibliography
+   '("~/org/sylph/bibliography.org")))
+#+end_src
+
+*** Lumanu Local
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ~/.emacs.d/host/lumanu.local.el
+:header-args:emacs-lisp+: :comments link
+:END:
+
+#+begin_src emacs-lisp
+(setq user-mail-address "jacob.sonnenberg@lumanu.com")
+
+(use-package org-agenda
+  :custom
+  (org-agenda-files '("~/org/lumanu.local/history.org"
+                      "~/org/lumanu.local/calendar.org"
+                      "~/org/lumanu.local/todo.org")))
+
+(use-package emacs
+  :config
+  (setenv "JAVA_HOME" "/usr/local/opt/openjdk@11"))
+
+(set-face-attribute
+ 'default nil :family "Iosevka Custom" :height 150 :weight 'medium)
+
+(set-face-attribute
+ 'fixed-pitch nil :family "Iosevka Custom" :height 150 :weight 'medium)
+
+(set-face-attribute
+ 'variable-pitch nil :family "Iosevka Etoile" :height 150 :weight 'regular)
+#+end_src
+
 ** Display
 
 #+begin_src emacs-lisp
@@ -791,167 +953,5 @@
 
 (use-package clj-refactor
   :straight t :after clojure-mode)
-#+end_src
-
-** Host Specific
-
-#+begin_src emacs-lisp
-(cl-case system-type
-  ('darwin (load "~/.emacs.d/host/mac.el"))
-  ('gnu/linux (load "~/.emacs.d/host/linux.el")))
-
-(load (format "~/.emacs.d/host/%s.el" (system-name)))
-
-(use-package org-roam
-  :custom
-  (org-roam-directory (format "~/org/%s/roam/" (system-name))))
-#+end_src
-
-*** Mac
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ~/.emacs.d/host/mac.el
-:header-args:emacs-lisp+: :comments link
-:END:
-
-#+begin_src emacs-lisp
-(use-package prog-mode
-  :bind (:map prog-mode-map
-	      ("s-<tab>" . prog-indent-sexp)))
-
-;; Switched caps-lock and control at the system level
-(setq mac-command-modifier 'meta
-      mac-option-modifier 'super)
-
-(use-package osx-dictionary
-  :straight t
-  :bind (("C-c d" . 'osx-dictionary-search-word-at-point)
-         ("C-c D" . 'osx-dictionary-search-input)))
-#+end_src
-
-*** Sylph
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ~/.emacs.d/host/sylph.el
-:header-args:emacs-lisp+: :comments link
-:END:
-
-# Sylph = air
-
-#+begin_src emacs-lisp
-(setq user-mail-address "jasbrg@gmail.com")
-
-(use-package emacs
-  :config
-  (set-face-attribute
-   'default nil :family "Iosevka Custom" :height 130 :weight 'regular)
-  (set-face-attribute
-   'fixed-pitch nil :family "Iosevka Custom" :height 130 :weight 'regular)
-  (set-face-attribute
-   'variable-pitch nil :family "Iosevka Etoile" :height 130 :weight 'regular))
-
-(use-package prog-mode
-  :bind (:map prog-mode-map
-	          ("s-<tab>" . prog-indent-sexp)))
-
-(use-package ispell
-  :bind (("s-;" . ispell-word)
-         ("C-c SPC" . just-one-space))
-  :custom (ispell-program-name "ispell"))
-
-(use-package ox-publish
-  :custom
-  (org-publish-project-alist
-   '(("site"
-      :base-directory "~/org/site/"
-      :publishing-function org-html-publish-to-html
-      :publishing-directory "~/Public/site/"
-      :section-numbers nil
-      :with-toc nil
-      :makeindex t
-      :auto-sitemap t :sitemap-filename "sitemap.org"
-      :recursive t
-      :html-head "<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\"/>"
-      :html-preamble t))))
-
-(use-package erc
-  :custom
-  (erc-hide-list '("JOIN" "PART" "QUIT"))
-  (erc-insert-timestamp-function 'erc-insert-timestamp-left)
-  (erc-timestamp-only-if-changed-flag nil)
-  (erc-fill-column 75)
-  (erc-timestamp-format "[%H:%M] ")
-  (erc-fill-prefix      "      + "))
-
-(use-package ox-publish
-  :custom
-  (org-publish-project-alist
-   '(("site"
-      :base-directory "~/org/site/"
-      :publishing-function org-html-publish-to-html
-      :publishing-directory "~/Public/site/"
-      :section-numbers nil
-      :with-toc nil
-      :makeindex t
-      :auto-sitemap t :sitemap-filename "sitemap.org"
-      :recursive t
-      :html-head "<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\"/>"
-      :html-preamble t))))
-
-(use-package ispell
-  :custom (ispell-program-name "/opt/local/bin/aspell"))
-
-(use-package holy-books :straight t)
-
-(use-package ledger-mode
-  :straight t)
-
-;; Fun idea but not too practical because the agenda opens all `org-agenda-files'
-;; (add-to-list 'org-agenda-files org-roam-directory)
-
-(use-package elfeed :straight t)
-
-(use-package elfeed-org
-  :straight t
-  :custom
-  (rmh-elfeed-org-files '("~/org/feeds.org")))
-
-(use-package org-agenda
-  :custom
-  (org-agenda-files '("~/org/sylph/history.org"
-                      "~/org/sylph/calendar.org"
-                      "~/org/sylph/todo.org")))
-
-(use-package helm-bibtex
-  :custom
-  (bibtex-completion-bibliography
-   '("~/org/sylph/bibliography.org")))
-#+end_src
-
-*** Lumanu Local
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ~/.emacs.d/host/lumanu.local.el
-:header-args:emacs-lisp+: :comments link
-:END:
-
-#+begin_src emacs-lisp
-(setq user-mail-address "jacob.sonnenberg@lumanu.com")
-
-(use-package org-agenda
-  :custom
-  (org-agenda-files '("~/org/lumanu.local/history.org"
-                      "~/org/lumanu.local/calendar.org"
-                      "~/org/lumanu.local/todo.org")))
-
-(use-package emacs
-  :config
-  (setenv "JAVA_HOME" "/usr/local/opt/openjdk@11"))
-
-(set-face-attribute
- 'default nil :family "Iosevka Custom" :height 150 :weight 'medium)
-
-(set-face-attribute
- 'fixed-pitch nil :family "Iosevka Custom" :height 150 :weight 'medium)
-
-(set-face-attribute
- 'variable-pitch nil :family "Iosevka Etoile" :height 150 :weight 'regular)
 #+end_src
 
