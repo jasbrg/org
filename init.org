@@ -580,7 +580,7 @@
   :straight t)
 #+end_src
 
-*** Prog
+*** Programming
 
 #+begin_src emacs-lisp
 (use-package flycheck-mode
