@@ -97,6 +97,7 @@
 (load (format "~/.emacs.d/host/%s.el" (system-name)))
 
 (use-package org-roam
+  :straight t
   :custom
   (org-roam-directory (format "~/org/%s/roam/" (system-name))))
 #+end_src
