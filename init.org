@@ -4,11 +4,11 @@
 :header-args:emacs-lisp+: :comments link
 :END:
 
-** Initial Setup
-
 #+begin_src emacs-lisp :comments none
 ; -*- auto-save-hook: org-babel-detangle; -*-
 #+end_src
+
+** Initial Setup
 
 #+begin_src emacs-lisp
 ;;; init.el starts here
