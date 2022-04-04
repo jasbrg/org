@@ -956,4 +956,3 @@
 (set-face-attribute
  'variable-pitch nil :family "Iosevka Etoile" :height 150 :weight 'regular)
 #+end_src
-
