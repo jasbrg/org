@@ -130,10 +130,17 @@
     (interactive)
     (display-line-numbers-mode -1)))
 
-(defun pairing-mode ()
+(defun pairing-mode-on ()
   (interactive)
-  (global-display-line-numbers-mode)
-  (global-hl-line-mode))
+  (global-display-line-numbers-mode +1)
+  (global-hl-line-mode +1)
+  (setf blink-cursor-interval 0.1))
+
+(defun pairing-mode-off ()
+  (interactive)
+  (global-display-line-numbers-mode -1)
+  (global-hl-line-mode -1)
+  (setf blink-cursor-interval 0.3))
 #+end_src
 
 *** Helm (completion framework)
