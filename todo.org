@@ -1,7 +1,6 @@
 #+startup: overview
 #+todo: TODO(t) | DONE(d)
 #+todo: | CANCELLED(c)
-* TODO make (new) migrations a bb task
 * TODO add plaid webhook as 
 
 #+begin_example
