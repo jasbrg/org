@@ -739,7 +739,9 @@
   :config
   (show-paren-mode +1)
   :custom
-  (show-paren-style 'expression))
+  (show-paren-style 'expression)
+  :custom-face
+  (show-paren-match ((t (:box nil)))))
 
 (use-package paredit
   :straight t
