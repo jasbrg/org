@@ -129,6 +129,11 @@
   (defun display-line-numbers-mode-off ()
     (interactive)
     (display-line-numbers-mode -1)))
+
+(defun pairing-mode ()
+  (interactive)
+  (global-display-line-numbers-mode)
+  (global-hl-line-mode))
 #+end_src
 
 *** Helm (completion framework)
