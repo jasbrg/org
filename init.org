@@ -56,7 +56,7 @@
   (blink-cursor-interval 0.3)
   (column-number-mode t)
   (cursor-type 'box)
-  (global-hl-line-mode t)
+  (global-hl-line-mode nil)
   (global-hl-line-sticky-flag t)
   (indent-tabs-mode nil)
   (indicate-buffer-boundaries t)
