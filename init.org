@@ -970,6 +970,6 @@
 (set-face-attribute
  'variable-pitch nil :family "Iosevka Etoile" :height 150 :weight 'regular)
 
-(use-package emacs-asana
-  :straight t)
+(use-package asana
+  :straight (asana :type git :host github :repo "lmartel/emacs-asana"))
 #+end_src
