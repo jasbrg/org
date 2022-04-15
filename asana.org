@@ -1,0 +1,344 @@
+
+
+* Asana
+
+** TODO Admin UI Spam Improvements ❬ Admin/Process Improvements
+:PROPERTIES:
+:CREATED_AT: [2022-01-25 Tue 11:26]
+:MODIFIED_AT: [2022-02-02 Wed 23:03]
+:ASANA_ID: 753363591261343-1201711393406621
+:ASANA_URL: [[https://app.asana.com/0/753363591261343/1201711393406621]]
+:WORKSPACE: Lumanu
+:ASSIGNEE: Jacob Sonnenberg
+:ASSIGNEE_STATUS: inbox
+:PARENT_ID: 753363591261343-1201469254637315
+:END:
+:LOGBOOK:
+- [2022-02-02 Wed 23:03] (system)
+  Chris Smith: Chris Smith removed from
+  https://app.asana.com/0/1200533518542733/1200533518542733
+- [2022-02-02 Wed 23:03] (system)
+  Chris Smith: Chris Smith added subtask to task
+  https://app.asana.com/0/1200533518542733/1201469254637315
+- [2022-01-26 Wed 21:49] (system)
+  Samip Joshi: Samip Joshi changed the description
+- [2022-01-26 Wed 17:13] (comment)
+  Samip Joshi: On the last point around reporting payment received
+  date, it's a broader point around reporting. Would be great to see:
+  Settlement date - the date a corresponding deposit/credit card
+  payment came in for all invoices once that have been matched Payout
+  date - the date we disbursed funds for both EarlyPay and regular
+  invoices Spam date - the date we marked an invoice as spam
+  
+- [2022-01-26 Wed 13:20] (system)
+  Chris Smith: Chris Smith moved this Task from "In Progress" to
+  "Icebox" in Payments Pod - Kanban
+- [2022-01-25 Tue 13:06] (system)
+  Chris Smith: Chris Smith changed Kanban Priority to "P3"
+- [2022-01-25 Tue 13:06] (system)
+  Chris Smith: Chris Smith moved this Task from "NEW [Needs Priority]"
+  to "In Progress" in Payments Pod - Kanban
+- [2022-01-25 Tue 11:31] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg assigned to you
+- [2022-01-25 Tue 11:26] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg added to
+  https://app.asana.com/0/1200533518542733/1200533518542733
+:END:
+
+
+Got some feedback from Samip about better ways to communicate
+information about spam invoices
+
+"1) If we can hide spam invoices from Invoices [tab] and then have
+them show up on a sibling tab called 'Spam' that would be
+excellent. 2) If we can add the spam indicator on the EarlyPay page,
+that can allow Paul or myself to mark invoices as 'Spam' before a
+payment is collected. Also, if we could remove these from the EarlyPay
+page once they are marked spam then we can limit the noise on that
+page. Worth noting that we do not use the Invoices tab very often
+other than to identify Payment Received, hence our ask.
+
+Lastly if there is a way to show Payment Received date that would be
+helpful too."
+
+** TODO Update tests ❬ New money flow -- cleanup
+:PROPERTIES:
+:CREATED_AT: [2022-02-14 Mon 09:52]
+:MODIFIED_AT: [2022-03-15 Tue 23:13]
+:ASANA_ID: 753363591261343-1201810841507938
+:ASANA_URL: [[https://app.asana.com/0/753363591261343/1201810841507938]]
+:WORKSPACE: Lumanu
+:ASSIGNEE: Jacob Sonnenberg
+:ASSIGNEE_STATUS: inbox
+:PARENT_ID: 753363591261343-1201960634057292
+:END:
+:LOGBOOK:
+- [2022-03-15 Tue 23:13] (system)
+  Tony Tran: Tony Tran removed from
+  https://app.asana.com/0/1200533518542733/1200533518542733
+- [2022-03-15 Tue 23:13] (system)
+  Tony Tran: Tony Tran added subtask to task
+  https://app.asana.com/0/1200533518542733/1201960634057292
+- [2022-03-15 Tue 23:13] (system)
+  Tony Tran: Tony Tran removed from
+  https://app.asana.com/0/1200533518542733/1201632025204595
+- [2022-03-15 Tue 23:13] (system)
+  Tony Tran: Tony Tran added to
+  https://app.asana.com/0/1200533518542733/1200533518542733
+- [2022-03-10 Thu 13:11] (system)
+  Chris Smith: Chris Smith assigned to you
+- [2022-03-09 Wed 18:13] (system)
+  Chris Smith: Chris Smith changed Kanban Priority from "P1" to "P2"
+- [2022-03-07 Mon 14:33] (system)
+  Chris Smith: Chris Smith assigned to Dmitri Sotnikov
+- [2022-02-14 Mon 09:52] (system)
+  Chris Smith: Chris Smith added subtask to task
+  https://app.asana.com/0/1200533518542733/1201632025204595
+:END:
+
+** TODO Add a link to creator's W-9 on the creator setting page ❬ Feature: User can download/edit W-9 from settings on web
+:PROPERTIES:
+:CREATED_AT: [2022-01-05 Wed 12:35]
+:MODIFIED_AT: [2022-03-28 Mon 18:36]
+:ASANA_ID: 753363591261343-1201620787815543
+:ASANA_URL: [[https://app.asana.com/0/753363591261343/1201620787815543]]
+:WORKSPACE: Lumanu
+:ASSIGNEE: Jacob Sonnenberg
+:ASSIGNEE_STATUS: inbox
+:PARENT_ID: 753363591261343-1201895294081188
+:END:
+:LOGBOOK:
+- [2022-03-28 Mon 18:36] (system)
+  Cas Zandona: Cas Zandona changed Figma URL to
+  "https://www.figma.com/file/QnBfqb6fdBzCHt05IOaODB/Payments%3A-Core---W9%2FKYC-Collection---12%2F21---Working?node-id=2936%3A28281"
+- [2022-03-15 Tue 23:27] (system)
+  Tony Tran: Tony Tran changed the name to "Add a link to creator's
+  W-9 on the creator setting page"
+- [2022-03-02 Wed 11:05] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg added subtask to task
+  https://app.asana.com/0/1201391076008920/1201895294081188
+- [2022-03-02 Wed 11:05] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg removed from
+  https://app.asana.com/0/1200533518542733/1201516018849621
+- [2022-03-02 Wed 09:33] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg assigned to you
+- [2022-02-09 Wed 14:09] (system)
+  Salvatore Tosti: Salvatore Tosti unassigned from Salvatore Tosti
+- [2022-02-09 Wed 13:23] (system)
+  Salvatore Tosti: Salvatore Tosti changed the name to "[Post-MVP] Add
+  a link to creator's W-9 on the creator setting page"
+- [2022-01-05 Wed 12:47] (system)
+  Salvatore Tosti: Salvatore Tosti assigned to Salvatore Tosti
+- [2022-01-05 Wed 12:35] (system)
+  Salvatore Tosti: Salvatore Tosti added subtask to task
+  https://app.asana.com/0/1200533518542733/1201516018849621
+:END:
+
+
+The W-9 will be stored / generated by Abound, so we might need to just
+store some identifying information (an ID) for the W-9 in our database
+(on the tax_user_info table)
+
+** TODO Create endpoint to allow manual reviewing an a creator's verification ❬ KYC Admin Experience 
+:PROPERTIES:
+:CREATED_AT: [2022-04-11 Mon 14:13]
+:MODIFIED_AT: [2022-04-13 Wed 13:04]
+:ASANA_ID: 753363591261343-1202109698933017
+:ASANA_URL: [[https://app.asana.com/0/753363591261343/1202109698933017]]
+:WORKSPACE: Lumanu
+:ASSIGNEE: Jacob Sonnenberg
+:ASSIGNEE_STATUS: inbox
+:PARENT_ID: 753363591261343-1201914983307088
+:END:
+:LOGBOOK:
+- [2022-04-13 Wed 13:04] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg changed Dev Status to "Done"
+- [2022-04-13 Wed 13:04] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg moved this Task from "Untitled
+  section" to "In Progress" in Payments Pod - Kanban
+- [2022-04-13 Wed 13:04] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg added to
+  https://app.asana.com/0/1200533518542733/1200533518542733
+- [2022-04-11 Mon 16:59] (system)
+  Jenny Quach: Jenny Quach added Wil Sanctis as a collaborator
+- [2022-04-11 Mon 16:57] (comment)
+  Jenny Quach: Please ignore my previous comment(s) I've updated the
+  requirements
+- [2022-04-11 Mon 16:54] (system)
+  Jenny Quach: Jenny Quach changed the description
+- [2022-04-11 Mon 16:14] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg added Salvatore Tosti as a
+  collaborator
+- [2022-04-11 Mon 15:13] (comment)
+  Jenny Quach: I think we just need functionality to either mark
+  creator as reviewed, or remove the manual review so long as user is
+  not being reset
+- [2022-04-11 Mon 14:25] (comment)
+  Jenny Quach: Question, should we prevent admin from manually
+  reviewing if the user is being reset?
+  https://app.asana.com/0/1198218622570572/list
+- [2022-04-11 Mon 14:14] (system)
+  Jenny Quach: Jenny Quach added Tim Janssen as a collaborator
+- [2022-04-11 Mon 14:14] (system)
+  Jenny Quach: Jenny Quach added John Garcia as a collaborator
+- [2022-04-11 Mon 14:14] (system)
+  Jenny Quach: Jenny Quach assigned to you
+- [2022-04-11 Mon 14:13] (system)
+  Jenny Quach: Jenny Quach added subtask to task
+  https://app.asana.com/0/1201391076008920/1201914983307088
+:END:
+
+
+Atm, we're assume that the manual review will make use of the same
+columns in the db as resetting a user
+
+columns that would be affected in the creator_verification table
+
+overridden_at
+
+override_user_id
+
+override_status
+
+What the override status for manual review would be .... ask Sal?
+
+^ TOTALLY WRONG THERE
+
+Background
+
+We need an ability for Admins to make notes on whether a user has been
+reviewed. ATM its just a simple checkbox and has no special
+functionality
+
+“The checkbox will allow those in Admin to indicate that they have
+reviewed a creator with pending KYC/KYB, and that no further action is
+necessary” - Wil
+
+Request
+
+We need an api to allow an Admin to mark/unmark a creator as reviewed
+
+We also need to know who the reviewer was and when it was done
+
+** TODO [BUG] Duplicates showing on compliance table ❬ Admin/Compliance QoL
+:PROPERTIES:
+:CREATED_AT: [2022-04-14 Thu 10:44]
+:MODIFIED_AT: [2022-04-14 Thu 13:02]
+:ASANA_ID: 753363591261343-1202126662611719
+:ASANA_URL: [[https://app.asana.com/0/753363591261343/1202126662611719]]
+:WORKSPACE: Lumanu
+:ASSIGNEE: Jacob Sonnenberg
+:ASSIGNEE_STATUS: inbox
+:PARENT_ID: 753363591261343-1202120243495957
+:END:
+:LOGBOOK:
+- [2022-04-14 Thu 13:02] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg moved this Task from "Untitled
+  section" to "Bugs 🐞" in Payments Pod - Kanban
+- [2022-04-14 Thu 13:02] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg added to
+  https://app.asana.com/0/1200533518542733/1200533518542733
+- [2022-04-14 Thu 11:26] (system)
+  Jenny Quach: Jenny Quach assigned to you
+- [2022-04-14 Thu 11:04] (system)
+  Jenny Quach: Jenny Quach unassigned from you
+- [2022-04-14 Thu 11:04] (system)
+  Jenny Quach: Jenny Quach assigned to you
+- [2022-04-14 Thu 10:44] (system)
+  Jenny Quach: Jenny Quach added subtask to task
+  https://app.asana.com/0/1201391076008920/1202120243495957
+:END:
+
+** TODO Check for `parentTransferId` on webhooks and apply status based on that
+:PROPERTIES:
+:CREATED_AT: [2022-03-23 Wed 12:30]
+:MODIFIED_AT: [2022-04-14 Thu 15:24]
+:ASANA_ID: 753363591261343-1202007884162538
+:ASANA_URL: [[https://app.asana.com/0/753363591261343/1202007884162538]]
+:WORKSPACE: Lumanu
+:ASSIGNEE: Jacob Sonnenberg
+:ASSIGNEE_STATUS: inbox
+:END:
+:LOGBOOK:
+- [2022-04-14 Thu 15:24] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg changed Dev Status from "PR" to
+  "Done"
+- [2022-04-06 Wed 13:18] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg changed GitHub URL to
+  "https://github.com/lumanu/lumanu/pull/3547"
+- [2022-04-06 Wed 12:52] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg changed Dev Status from "InWork"
+  to "PR"
+- [2022-04-04 Mon 14:42] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg changed Dev Status from "Next" to
+  "InWork"
+- [2022-04-04 Mon 14:41] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg moved this Task from "Prioritized
+  Backlog" to "In Progress" in Payments Pod - Kanban
+- [2022-04-04 Mon 14:41] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg assigned to you
+- [2022-03-24 Thu 22:12] (system)
+  Tony Tran: Tony Tran changed Dev Status to "Next"
+- [2022-03-24 Thu 22:12] (system)
+  Tony Tran: Tony Tran cleared Kanban Priority
+- [2022-03-23 Wed 13:08] (system)
+  Chris Smith: Chris Smith moved this Task from "NEW [Needs Priority]"
+  to "Prioritized Backlog" in Payments Pod - Kanban
+- [2022-03-23 Wed 12:30] (system)
+  Chris Smith: Chris Smith added to
+  https://app.asana.com/0/1200533518542733/1200533518542733
+:END:
+
+
+Based on this thread:
+https://lumanu.slack.com/archives/CE14ME2KT/p1648050470746649
+
+When we process a webhook and try to get the transferId (from the ach,
+intrabank, etc object on the payload), we should first check if there
+is a parentTransferId on the payload. If there is and the subType is
+reversal, we should set the status of the transaction that matches the
+parentTransferId to failed
+
+** TODO Expose more verification details 
+DEADLINE: <2022-04-08 Fri>
+:PROPERTIES:
+:CREATED_AT: [2022-04-08 Fri 13:39]
+:MODIFIED_AT: [2022-04-12 Tue 13:12]
+:ASANA_ID: 753363591261343-1202096944343320
+:ASANA_URL: [[https://app.asana.com/0/753363591261343/1202096944343320]]
+:WORKSPACE: Lumanu
+:ASSIGNEE: Jacob Sonnenberg
+:ASSIGNEE_STATUS: inbox
+:END:
+:LOGBOOK:
+- [2022-04-12 Tue 13:12] (system)
+  Chris Smith: Chris Smith changed Dev Status from "PR" to "Done"
+- [2022-04-11 Mon 13:14] (system)
+  Chris Smith: Chris Smith moved this Task from "NEW [Needs Priority]"
+  to "In Progress" in Payments Pod - Kanban
+- [2022-04-08 Fri 17:01] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg changed GitHub URL to
+  "https://github.com/lumanu/lumanu/pull/3593"
+- [2022-04-08 Fri 17:00] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg changed Dev Status from "InWork"
+  to "PR"
+- [2022-04-08 Fri 13:59] (comment)
+  Jenny Quach: Oh yea, do we have an endpoint to update that override
+  status?
+- [2022-04-08 Fri 13:46] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg changed the due date to April 8
+- [2022-04-08 Fri 13:44] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg added Jenny Quach as a
+  collaborator
+- [2022-04-08 Fri 13:40] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg assigned to you
+- [2022-04-08 Fri 13:39] (system)
+  Jacob Sonnenberg: Jacob Sonnenberg added to
+  https://app.asana.com/0/1200533518542733/1200533518542733
+:END:
+
+
+The verification-details endpoint should expose W9 completion date and
+override statuses
+
+The verification-list endpoint should expose override statuses
