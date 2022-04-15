@@ -971,5 +971,6 @@
  'variable-pitch nil :family "Iosevka Etoile" :height 150 :weight 'regular)
 
 (use-package asana
-  :straight (asana :type git :host github :repo "lmartel/emacs-asana"))
+  :straight (asana :type git :host github :repo "lmartel/emacs-asana")
+  :custom (asana-tasks-org-file "~/org/lumanu.local/asana.org"))
 #+end_src
