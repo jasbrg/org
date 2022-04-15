@@ -148,7 +148,7 @@
 #+begin_src emacs-lisp
 (use-package helm
   :straight t :demand t
-  :delight " 🪖"
+  :delight " ⎈"
   :bind (("M-x" . helm-M-x)
          ("C-x C-f" . helm-find-files)
          ("C-x b" . helm-buffers-list)
