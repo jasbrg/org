@@ -193,6 +193,14 @@
 ;;               ("C-M-i" . helm-company)))
 #+end_src
 
+*** Vertico 
+
+#+begin_src emacs-lisp
+(use-package vertico
+  :init
+  (vertico-mode))
+#+end_src
+
 ** Documentation
 
 #+begin_src emacs-lisp
