@@ -198,8 +198,14 @@
 #+begin_src emacs-lisp
 (use-package vertico
   :straight t
+  :bind (("M-x" . 'execute-extended-command))
   :init
   (vertico-mode))
+
+(use-package marginalia
+  :straight t
+  :init
+  (marginalia-mode))
 #+end_src
 
 ** Documentation
