@@ -197,6 +197,7 @@
 
 #+begin_src emacs-lisp
 (use-package vertico
+  :straight t
   :init
   (vertico-mode))
 #+end_src
