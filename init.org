@@ -146,51 +146,51 @@
 *** Helm (completion framework)
 
 #+begin_src emacs-lisp
-(use-package helm
-  :straight t :demand t
-  :delight ""
-  :bind (("M-x" . helm-M-x)
-         ("C-x C-f" . helm-find-files)
-         ("C-x b" . helm-buffers-list)
-         ("M-y" . helm-show-kill-ring)
-         ("C-c h a" . helm-apropos))
-  :custom
-  (helm-display-function 'helm-default-display-buffer)
-  (helm-display-buffer-reuse-frame t)
-  (helm-use-undecorated-frame-option t)
-  (helm-split-window-default-side 'below)
-  (helm-truncate-lines t)
-  (helm-split-window-inside-p t)
-  :config (helm-mode t)
-  (add-hook 'helm-top-after-init-hook
-            #'toggle-truncate-lines))
+;; (use-package helm
+;;   :straight t :demand t
+;;   :delight ""
+;;   :bind (("M-x" . helm-M-x)
+;;          ("C-x C-f" . helm-find-files)
+;;          ("C-x b" . helm-buffers-list)
+;;          ("M-y" . helm-show-kill-ring)
+;;          ("C-c h a" . helm-apropos))
+;;   :custom
+;;   (helm-display-function 'helm-default-display-buffer)
+;;   (helm-display-buffer-reuse-frame t)
+;;   (helm-use-undecorated-frame-option t)
+;;   (helm-split-window-default-side 'below)
+;;   (helm-truncate-lines t)
+;;   (helm-split-window-inside-p t)
+;;   :config (helm-mode t)
+;;   (add-hook 'helm-top-after-init-hook
+;;             #'toggle-truncate-lines))
 
-(use-package helm-bibtex
-  :straight t
-  :bind (("C-c o TAB" . 'helm-bibtex))
-  :config
-  (setq bibtex-completion-notes-path org-directory
-        bibtex-completion-library-path
-        '("~/Documents/Books" "~/Documents/Papers")
-        bibtex-completion-find-additional-pdfs t
-        bibtex-completion-pdf-extension
-        '(".pdf" ".epub")))
+;; (use-package helm-bibtex
+;;   :straight t
+;;   :bind (("C-c o TAB" . 'helm-bibtex))
+;;   :config
+;;   (setq bibtex-completion-notes-path org-directory
+;;         bibtex-completion-library-path
+;;         '("~/Documents/Books" "~/Documents/Papers")
+;;         bibtex-completion-find-additional-pdfs t
+;;         bibtex-completion-pdf-extension
+;;         '(".pdf" ".epub")))
 
-(use-package helm-lsp :straight t
-  :commands helm-lsp-workspace-symbol)
+;; (use-package helm-lsp :straight t
+;;   :commands helm-lsp-workspace-symbol)
 
-(use-package helm-unicode
-  :straight t :after helm
-  :bind (("C-x 8 RET" . helm-unicode)))
+;; (use-package helm-unicode
+;;   :straight t :after helm
+;;   :bind (("C-x 8 RET" . helm-unicode)))
 
-(use-package helm-cider
-  :after helm
-  :straight t)
+;; (use-package helm-cider
+;;   :after helm
+;;   :straight t)
 
-(use-package helm-company
-  :straight t
-  :bind (:map company-mode-map
-              ("C-M-i" . helm-company)))
+;; (use-package helm-company
+;;   :straight t
+;;   :bind (:map company-mode-map
+;;               ("C-M-i" . helm-company)))
 #+end_src
 
 ** Documentation
