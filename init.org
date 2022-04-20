@@ -591,6 +591,9 @@
          ("C-c n t a" . org-roam-tag-add)
          ("C-c n t d" . org-roam-tag-remove)))
 
+(use-package org-roam-ui
+  :straight t)
+
 (use-package org-roam-protocol
   :custom
   (org-roam-capture-ref-templates
