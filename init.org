@@ -203,8 +203,7 @@
   :init
   (vertico-mode))
 
-(use-package vertico-mouse
-  )
+(use-package vertico-mouse)
 
 (use-package savehist
   :straight t
