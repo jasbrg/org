@@ -198,11 +198,13 @@
 #+begin_src emacs-lisp
 (use-package vertico
   :straight t
-  :bind (("M-x" . 'execute-extended-command))
+  :bind (("M-x" . 'execute-extended-command)
+         ("C-x C-f" . 'find-file))
   :init
   (vertico-mode))
 
-(use-package vertico-mouse)
+(use-package vertico-mouse
+  )
 
 (use-package savehist
   :straight t
