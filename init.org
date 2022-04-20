@@ -592,7 +592,10 @@
          ("C-c n t d" . org-roam-tag-remove)))
 
 (use-package org-roam-ui
-  :straight t)
+  :straight t
+  :custom
+  (org-roam-ui-follow t)
+  (org-roam-ui-update-on-save t))
 
 (use-package org-roam-protocol
   :custom
