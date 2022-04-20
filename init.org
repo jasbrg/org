@@ -222,6 +222,12 @@
   :straight t
   :init
   (marginalia-mode))
+
+(use-package orderless
+  :straight t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 #+end_src
 
 ** Documentation
