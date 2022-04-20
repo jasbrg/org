@@ -201,7 +201,8 @@
   :bind (("M-x" . 'execute-extended-command)
          ("C-x C-f" . 'find-file))
   :init
-  (vertico-mode))
+  (vertico-mode)
+  (add-to-list 'load-path "~/.emacs.d/straight/repos/vertico/extensions/"))
 
 (use-package vertico-mouse)
 
