@@ -209,7 +209,9 @@
   :init
   (vertico-mouse-mode))
 
-(use-package vertico-directory)
+(use-package vertico-directory
+  :init
+  (vertico-direc))
 
 (use-package savehist
   :straight t
