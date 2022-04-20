@@ -205,6 +205,8 @@
 
 (use-package vertico-mouse)
 
+(use-package vertico-directory)
+
 (use-package savehist
   :straight t
   :init
