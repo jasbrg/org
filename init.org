@@ -161,6 +161,7 @@
   (helm-split-window-default-side 'below)
   (helm-truncate-lines t)
   (helm-split-window-inside-p t)
+  (helm-allow-mouse t)
   :config (helm-mode t)
   (add-hook 'helm-top-after-init-hook
             #'toggle-truncate-lines))
