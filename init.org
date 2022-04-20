@@ -221,13 +221,20 @@
 (use-package marginalia
   :straight t
   :init
-  (marginalia-mode))
+  (marginalia-mode)
+  (marg))
 
 (use-package orderless
   :straight t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
+
+(use-package consult
+  :straight t)
+
+(use-package embark
+  :straight t)
 #+end_src
 
 ** Documentation
