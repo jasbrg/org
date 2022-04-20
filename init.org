@@ -593,7 +593,7 @@
 
 (use-package org-roam-ui
   :straight t
-  :delight " "
+  :delight ""
   :custom
   (org-roam-ui-follow t)
   (org-roam-ui-update-on-save t))
