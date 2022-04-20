@@ -204,7 +204,10 @@
   (vertico-mode)
   (add-to-list 'load-path "~/.emacs.d/straight/repos/vertico/extensions/"))
 
-(use-package vertico-mouse)
+(use-package vertico-mouse
+  :after vertico
+  :init
+  (vertico-mouse-mode))
 
 (use-package vertico-directory)
 
