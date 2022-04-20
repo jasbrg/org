@@ -343,7 +343,8 @@
   :straight t
   :bind (("C-c T" . 'treemacs)
          ("C-c t" . 'treemacs-select-window))
-  :hook ((treemacs-mode) . display-line-numbers-mode-off)
+  ;; broken :(
+  ;; :hook ((treemacs-mode) . display-line-numbers-mode-off)
   :custom
   (treemacs-sorting 'mod-time-desc))
 #+end_src
