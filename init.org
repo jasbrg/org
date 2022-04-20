@@ -200,8 +200,14 @@
   :straight t
   :bind (("M-x" . 'execute-extended-command))
   :init
-  (use-package vertico-mouse)
   (vertico-mode))
+
+(use-package vertico-mouse)
+
+(use-package savehist
+  :straight t
+  :init
+  (savehist-mode))
 
 (use-package marginalia
   :straight t
