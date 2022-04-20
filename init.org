@@ -196,45 +196,45 @@
 *** Vertico 
 
 #+begin_src emacs-lisp
-(use-package vertico
-  :straight t
-  :bind (("M-x" . 'execute-extended-command)
-         ("C-x C-f" . 'find-file))
-  :init
-  (vertico-mode)
-  (add-to-list 'load-path "~/.emacs.d/straight/repos/vertico/extensions/"))
+;; (use-package vertico
+;;   :straight t
+;;   :bind (("M-x" . 'execute-extended-command)
+;;          ("C-x C-f" . 'find-file))
+;;   :init
+;;   (vertico-mode)
+;;   (add-to-list 'load-path "~/.emacs.d/straight/repos/vertico/extensions/"))
 
-(use-package vertico-mouse
-  :after vertico
-  :init
-  (vertico-mouse-mode))
+;; (use-package vertico-mouse
+;;   :after vertico
+;;   :init
+;;   (vertico-mouse-mode))
 
-(use-package vertico-directory
-  :init
-  (vertico-direc))
+;; (use-package vertico-directory
+;;   :init
+;;   (vertico-direc))
 
-(use-package savehist
-  :straight t
-  :init
-  (savehist-mode))
+;; (use-package savehist
+;;   :straight t
+;;   :init
+;;   (savehist-mode))
 
-(use-package marginalia
-  :straight t
-  :init
-  (marginalia-mode)
-  (marg))
+;; (use-package marginalia
+;;   :straight t
+;;   :init
+;;   (marginalia-mode)
+;;   (marg))
 
-(use-package orderless
-  :straight t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
+;; (use-package orderless
+;;   :straight t
+;;   :custom
+;;   (completion-styles '(orderless basic))
+;;   (completion-category-overrides '((file (styles basic partial-completion)))))
 
-(use-package consult
-  :straight t)
+;; (use-package consult
+;;   :straight t)
 
-(use-package embark
-  :straight t)
+;; (use-package embark
+;;   :straight t)
 #+end_src
 
 ** Documentation
