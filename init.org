@@ -404,7 +404,7 @@
 #+begin_src emacs-lisp
 (use-package ispell
   :custom
-  (ispell-program-name "ispell")
+  (ispell-program-name "/opt/homebrew/bin/ispell")
   :bind (("C-c s" . ispell-word)
          ("C-c S" . ispell)))
 
