@@ -260,7 +260,12 @@
          ("M-." . embark-dwim)))
 
 (use-package corfu
-  :straight t)
+  :straight t
+  :bind (("C-c SPC" . corfu-insert-separator))
+  :custom
+  (corfu-echo-documentation t)
+  :init
+  (global-corfu-mode t))
 
 (use-package dabbrev
   ;; Swap M-/ and C-M-/
