@@ -253,7 +253,10 @@
          ("C-c r m" . consult-bookmark)
          ("C-c c o" . consult-outline)
          :map org-mode-map
-         ("C-c c o" . consult-org-heading)))
+         ("C-c c o" . consult-org-heading))
+  :init
+  (use-package consult-org-roam
+    :straight (consult-org-roam :type git :host github :repo "jgru/consult-org-roam")))
 
 (use-package embark
   :straight t
