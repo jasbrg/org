@@ -76,6 +76,13 @@
   (word-wrap t)
   (ring-bell-function 'ignore)
   (visible-bell nil)
+  (truncate-lines t)
+  (truncate-partial-width-windows 50)
+  (initial-scratch-message ";; Take therefore no thought for the morrow:
+;; for the morrow shall take thought for the things of itself.
+;; Sufficient unto the day is the evil thereof. Matthew 6:34 KJV‬‬
+")
+  (ispell-program-name "/opt/homebrew/bin/ispell")
   :custom-face
   (hl-line ((t (:box nil)))))
 #+end_src
@@ -143,7 +150,7 @@
   (setf blink-cursor-interval 0.3))
 #+end_src
 
-*** Helm (completion framework)
+*** COMMENT Helm (completion framework)
 
 #+begin_src emacs-lisp
 (use-package helm
@@ -166,16 +173,16 @@
   (add-hook 'helm-top-after-init-hook
             #'toggle-truncate-lines))
 
-(use-package helm-bibtex
-  :straight t
-  :bind (("C-c o TAB" . 'helm-bibtex))
-  :config
-  (setq bibtex-completion-notes-path org-directory
-        bibtex-completion-library-path
-        '("~/Documents/Books" "~/Documents/Papers")
-        bibtex-completion-find-additional-pdfs t
-        bibtex-completion-pdf-extension
-        '(".pdf" ".epub")))
+;; (use-package helm-bibtex
+;;   :straight t
+;;   :bind (("C-c o TAB" . 'helm-bibtex))
+;;   :config
+;;   (setq bibtex-completion-notes-path org-directory
+;;         bibtex-completion-library-path
+;;         '("~/Documents/Books" "~/Documents/Papers")
+;;         bibtex-completion-find-additional-pdfs t
+;;         bibtex-completion-pdf-extension
+;;         '(".pdf" ".epub")))
 
 (use-package helm-lsp :straight t
   :commands helm-lsp-workspace-symbol)
@@ -194,48 +201,76 @@
               ("C-M-i" . helm-company)))
 #+end_src
 
-*** Vertico 
+*** Vertico
 
 #+begin_src emacs-lisp
-;; (use-package vertico
-;;   :straight t
-;;   :bind (("M-x" . 'execute-extended-command)
-;;          ("C-x C-f" . 'find-file))
-;;   :init
-;;   (vertico-mode)
-;;   (add-to-list 'load-path "~/.emacs.d/straight/repos/vertico/extensions/"))
+(use-package vertico
+  :straight t
+  :bind (("M-x" . 'execute-extended-command)
+         ("C-x C-f" . 'find-file))
+  :init
+  (vertico-mode)
+  (add-to-list 'load-path "~/.emacs.d/straight/repos/vertico/extensions/")
+  :config
+  (use-package vertico-directory)
+  (use-package vertico-mouse
+    :config (vertico-mouse-mode))
+  (use-package vertico-quick
+    ;; I don't get it?
+    :bind (("C-c q i" . vertico-quick-insert)
+           ("C-c q q" . vertico-quick-exit))))
 
-;; (use-package vertico-mouse
-;;   :after vertico
-;;   :init
-;;   (vertico-mouse-mode))
+(use-package vertico-mouse
+  :after vertico
+  :init (vertico-mouse-mode))
 
-;; (use-package vertico-directory
-;;   :init
-;;   (vertico-direc))
+(use-package savehist
+  :straight t
+  :init (savehist-mode))
 
-;; (use-package savehist
-;;   :straight t
-;;   :init
-;;   (savehist-mode))
+(use-package marginalia
+  :straight t
+  :init (marginalia-mode)
+  :bind (:map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+  :custom
+  (marginalia-field-width 80))
 
-;; (use-package marginalia
-;;   :straight t
-;;   :init
-;;   (marginalia-mode)
-;;   (marg))
+(use-package orderless
+  :straight t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
-;; (use-package orderless
-;;   :straight t
-;;   :custom
-;;   (completion-styles '(orderless basic))
-;;   (completion-category-overrides '((file (styles basic partial-completion)))))
+(use-package consult
+  :straight t
+  :bind (("C-c h a" . consult-apropos)
+         ("C-c h m" . consult-man)
+         ("C-c b" . consult-buffer)
+         ("C-c r l" . consult-mark)
+         ("C-c r g" . consult-global-mark)
+         ("C-c r m" . consult-bookmark)
+         ("C-c c o" . consult-outline)
+         :map org-mode-map
+         ("C-c c o" . consult-org-heading)))
 
-;; (use-package consult
-;;   :straight t)
+(use-package embark
+  :straight t
+  :bind (("C-." . embark-act)
+         ("M-." . embark-dwim)))
 
-;; (use-package embark
-;;   :straight t)
+(use-package corfu
+  :straight t)
+
+(use-package dabbrev
+  ;; Swap M-/ and C-M-/
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand)))
+
+(use-package cape
+  :straight t
+  :config
+  (add-to-list 'completion-at-point-functions 'cape-file))
 #+end_src
 
 ** Documentation
@@ -403,6 +438,7 @@
 
 #+begin_src emacs-lisp
 (use-package ispell
+  :demand t
   :custom
   (ispell-program-name "/opt/homebrew/bin/ispell")
   :bind (("C-c s" . ispell-word)
@@ -609,22 +645,22 @@
       :unnarrowed t
       :immediate-finish t))))
 
-(use-package org-roam-bibtex
-  :straight t
-  :after (org-roam helm-bibtex)
-  :bind (:map org-mode-map ("C-c n b" . orb-note-actions))
-  :config
-  (require 'org-ref))
+;; (use-package org-roam-bibtex
+;;   :straight t
+;;   :after (org-roam helm-bibtex)
+;;   :bind (:map org-mode-map ("C-c n b" . orb-note-actions))
+;;   :config
+;;   (require 'org-ref))
 
-(use-package org-ref
-  :straight t
-  :custom
-  (org-ref-completion-library 'org-ref-helm-cite)
-  (org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex)
-  (org-ref-default-bibliography "~/org/sylph/bibliography.bib")
-  (org-ref-notes-directory org-directory)
-  (org-ref-notes-function 'orb-edit-notes)
-  (org-roam-node-display-template "${title:30} ${tags:15}"))
+;; (use-package org-ref
+;;   :straight t
+;;   :custom
+;;   (org-ref-completion-library 'org-ref-helm-cite)
+;;   (org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex)
+;;   (org-ref-default-bibliography "~/org/sylph/bibliography.bib")
+;;   (org-ref-notes-directory org-directory)
+;;   (org-ref-notes-function 'orb-edit-notes)
+;;   (org-roam-node-display-template "${title:30} ${tags:15}"))
 
 (use-package orgit
   :straight t)
@@ -653,6 +689,8 @@
   :hook ((clojure-mode clojurescript-mode)
          . flycheck-mode))
 #+end_src
+
+**** COMMENT Intellisense completion
 
 #+begin_src emacs-lisp
 (use-package company
@@ -755,7 +793,7 @@
   :config
   (add-hook 'go-mode-hook 'electric-pair-local-mode)
   ;; (add-hook 'go-mode-hook 'eglot)
-  (add-hook 'go-mode-hook 'company-mode)
+  ;; (add-hook 'go-mode-hook 'company-mode)
   (add-hook 'go-mode-hook 'yas-minor-mode-on))
 #+end_src
 
@@ -989,10 +1027,10 @@
                       "~/org/sylph/calendar.org"
                       "~/org/sylph/todo.org")))
 
-(use-package helm-bibtex
-  :custom
-  (bibtex-completion-bibliography
-   '("~/org/sylph/bibliography.org")))
+;; (use-package helm-bibtex
+;;   :custom
+;;   (bibtex-completion-bibliography
+;;    '("~/org/sylph/bibliography.org")))
 #+end_src
 
 *** Lumanu Local
