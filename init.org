@@ -967,7 +967,8 @@
 
 (use-package ispell
   :bind (("s-;" . ispell-word)
-         ("C-c SPC" . just-one-space))
+         ;; ("C-c SPC" . just-one-space)
+         )
   :custom (ispell-program-name "ispell"))
 
 (use-package ox-publish
