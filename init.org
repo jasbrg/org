@@ -265,11 +265,19 @@
 
 (use-package corfu
   :straight t
-  :bind (("C-c SPC" . corfu-insert-separator))
+  :bind (("M-SPC" . corfu-insert-separator))
   :custom
   (corfu-echo-documentation t)
   :init
-  (global-corfu-mode t))
+  (global-corfu-mode t)
+  (use-package corfu-doc
+    :straight t
+    :hook ((corfu-mode) . corfu-doc-mode)
+    :custom (corfu-doc-auto nil)
+    :bind (:map corfu-map
+                ("M-p" . #'corfu-doc-scroll-down)
+                ("M-n" . #'corfu-doc-scroll-up)
+                ("M-d" . #'corfu-doc-toggle))))
 
 (use-package dabbrev
   ;; Swap M-/ and C-M-/
@@ -608,6 +616,7 @@
   (add-to-list 'org-default-properties "ROAM_REFS")
   (add-to-list 'org-default-properties "ROAM_EXCLUDE")
   :custom
+  (org-roam-node-display-template "${title:50} ${tags}")
   (org-roam-capture-templates
    `(("d" "default" plain "%?"
       :if-new (file+head "%<%Y-%m-%d>-${slug}.org"
@@ -972,7 +981,7 @@
   :bind (("s-;" . ispell-word)
          ;; ("C-c SPC" . just-one-space)
          )
-  :custom (ispell-program-name "ispell"))
+  :custom (ispell-program-name "/opt/homebrew/bin/ispell"))
 
 (use-package ox-publish
   :custom
