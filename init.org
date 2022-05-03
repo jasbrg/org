@@ -637,13 +637,14 @@
       :jump-to-captured t)
      ;; TODO make a template for capturing task clocking
      ;; the roam daily entry should serve as a 'spine' for notes and tasks
-     ("c" "clocked entry" entry
-      "* %<%H:%M> %?"
-      :if-new (file+head "%<%Y-%m-%d>.org"
-                         "#+title: %<%Y-%m-%d>\n")
-      :immediate-finish t
-      :jump-to-captured t
-      :clock-in t)))
+     ;; ("c" "clocked entry" entry
+     ;;  "* %<%H:%M> %?"
+     ;;  :if-new (file+head "%<%Y-%m-%d>.org"
+     ;;                     "#+title: %<%Y-%m-%d>\n")
+     ;;  :immediate-finish t
+     ;;  :jump-to-captured t
+     ;;  :clock-in t)
+     ))
   :bind (("C-c o r" . (lambda ()
                         (interactive)
                         (dired org-roam-directory)))
