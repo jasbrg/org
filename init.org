@@ -638,7 +638,9 @@
          ("C-c n U" . org-roam-update-org-id-locations)
          ;; Dailies
          ("C-c n j" . org-roam-dailies-capture-today)
+         ("C-c n J" . org-roam-dailies-goto-today)
          ("C-c n d" . org-roam-dailies-capture-date)
+         ("C-c n D" . org-roam-dailies-goto-date)
          ;; References
          ("C-c n r a" . org-roam-ref-add)
          ("C-c n r f" . org-roam-ref-find)
