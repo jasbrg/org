@@ -634,8 +634,7 @@
       :if-new (file+head "%<%Y-%m-%d>.org"
                          "#+title: %<%Y-%m-%d>\n")
       :immediate-finish t
-      :jump-to-captured t
-      )
+      :jump-to-captured t)
      ;; TODO make a template for capturing task clocking
      ;; the roam daily entry should serve as a 'spine' for notes and tasks
      ;; ("c" "clocked entry" entry
