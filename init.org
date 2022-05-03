@@ -632,7 +632,19 @@
    `(("d" "default" entry
       "* %<%H:%M> %?"
       :if-new (file+head "%<%Y-%m-%d>.org"
-                         "#+title: %<%Y-%m-%d>\n"))))
+                         "#+title: %<%Y-%m-%d>\n")
+      :immediate-finish t
+      :jump-to-captured t)
+     ("c" "clocked entry" entry
+      "* %<%H:%M> %?"
+      :if-new (file+head "%<%Y-%m-%d>.org"
+                         "#+title: %<%Y-%m-%d>\n")
+      :immediate-finish t
+      :jump-to-captured t
+      :clock-in t
+      )
+     
+     ))
   :bind (("C-c o r" . (lambda ()
                         (interactive)
                         (dired org-roam-directory)))
