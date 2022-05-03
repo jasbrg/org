@@ -625,8 +625,7 @@
      ("f" "feature" plain "%?"
       :if-new (file+head "%<%Y-%m-%d>-${slug}.org"
                          "#+date: %<%Y-%m-%d>\n#+title: ${title}\n#+export_file_name: %<%Y-%m-%d>-${slug}\n#+filetags: feature")
-      :unnarrowed t)
-     ))
+      :unnarrowed t)))
   (org-roam-dailies-capture-templates
    `(("d" "default" entry
       "* %<%H:%M> %?"
