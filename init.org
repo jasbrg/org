@@ -247,7 +247,8 @@
   :straight t
   :bind (("C-c h a" . consult-apropos)
          ("C-c h m" . consult-man)
-         ("C-c b" . consult-buffer)
+         ;; ("C-x b" . switch-to-buffer)
+         ("C-x b" . consult-buffer)
          ("C-c r l" . consult-mark)
          ("C-c r g" . consult-global-mark)
          ("C-c r m" . consult-bookmark)
