@@ -252,7 +252,7 @@
          ("C-c r l" . consult-mark)
          ("C-c r g" . consult-global-mark)
          ("C-c r m" . consult-bookmark)
-         ("C-c c o" . consult-outline)
+         ;; ("C-c c o" . consult-outline)
          ;; :map org-mode-map
          ;; ("C-c c o" . consult-org-heading)
          )
