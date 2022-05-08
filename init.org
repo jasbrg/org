@@ -276,7 +276,7 @@
     :straight (corfu-doc :type git :host github :repo "galeo/corfu-doc")
     :hook ((corfu-mode) . corfu-doc-mode)
     :custom
-    (corfu-doc-auto t)
+    (corfu-doc-auto nil)
     (corfu-doc-delay 0.5)
     :bind (:map corfu-map
                 ("M-p" . #'corfu-doc-scroll-down)
