@@ -282,7 +282,7 @@
                 ("M-p" . #'corfu-doc-scroll-down)
                 ("M-n" . #'corfu-doc-scroll-up)
                 ("M-d" . #'corfu-doc-toggle))))
-
+(ad)
 (use-package dabbrev
   ;; Swap M-/ and C-M-/
   :bind (("M-/" . dabbrev-completion)
