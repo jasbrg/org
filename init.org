@@ -267,7 +267,7 @@
 
 (use-package corfu
   :straight t
-  :bind (("M-SPC" . corfu-insert-separator))
+  :bind (("C-c -" . corfu-insert-separator))
   :custom
   (corfu-echo-documentation t)
   :init
