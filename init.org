@@ -402,7 +402,8 @@
   ;; broken :(
   ;; :hook ((treemacs-mode) . display-line-numbers-mode-off)
   :custom
-  (treemacs-sorting 'mod-time-desc))
+  (treemacs-sorting 'mod-time-desc)
+  (treemacs-indentation 1))
 #+end_src
 
 **** Project Management
