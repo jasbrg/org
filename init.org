@@ -735,6 +735,8 @@
 
 **** COMMENT Intellisense completion
 
+Superseded by =corfu=
+
 #+begin_src emacs-lisp
 (use-package company
   :straight t :delight " CMP"
