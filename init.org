@@ -918,7 +918,8 @@ Superseded by =corfu=
 
 #+begin_src emacs-lisp
 (use-package clojure-mode
-  :straight t)
+  :straight t
+  :hook ((clojure-mode . (lambda () (setq-local paredit-comment-prefix-toplevel ";; ")))))
 
 (use-package cider
   :straight t :after clojure-mode
