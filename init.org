@@ -83,6 +83,7 @@
 ;; Sufficient unto the day is the evil thereof. Matthew 6:34 KJV‬‬
 ")
   (ispell-program-name "/opt/homebrew/bin/ispell")
+  (sentence-end-double-space nil)
   :custom-face
   (hl-line ((t (:box nil)))))
 #+end_src
@@ -556,6 +557,17 @@
   (remove-hook 'org-mode-hook 'org))
 
 (use-package org-crypt
+  :init
+  (defun my:org-buffer-contains-tag (tag)
+    (org-element-map (org-element-parse-buffer) 'headline
+      (lambda (item)
+        (-some (lambda (x) (string= x tag))
+               (org-element-property :tags item)))
+      nil t))
+  (defun my:dont-autosave-when-crypt-tag ()
+    (auto-save-mode (not (my:org-buffer-contains-tag "crypt"))))
+  :hook ((org-mode)
+         . my:dont-autosave-when-crypt-tag)
   :config
   (org-crypt-use-before-save-magic)
   (setq org-tags-exclude-from-inheritance '("crypt")
@@ -1049,9 +1061,6 @@ Superseded by =corfu=
       :recursive t
       :html-head "<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\"/>"
       :html-preamble t))))
-
-(use-package ispell
-  :custom (ispell-program-name "/opt/local/bin/ispell"))
 
 (use-package holy-books :straight t)
 
