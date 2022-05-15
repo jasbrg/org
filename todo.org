@@ -5,6 +5,7 @@
 
 The thing =*e= gets the last exception in the clojure repl. wouldn't
 it be nice if this were a command in cider?
+* TODO when org-crypt password entry is cancelled on a save, it saves anyway
 * TODO add plaid webhook as 
 
 #+begin_example
