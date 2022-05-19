@@ -217,8 +217,7 @@
     (defun pixel-scroll-precision-mode-off ()
       (setq-local pixel-scroll-precision-mode nil))
     :hook ((vertico-mouse-mode) . pixel-scroll-precision-mode-off)
-    :config (vertico-mouse-mode)
-    )
+    :config (vertico-mouse-mode))
   (use-package vertico-quick
     ;; I don't get it?
     :bind (("C-c q i" . vertico-quick-insert)
