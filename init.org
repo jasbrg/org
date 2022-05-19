@@ -111,7 +111,7 @@
   :straight t :demand t
   :config
   (setq base16-highlight-mode-line 'box)
-  (load-theme 'base16-grayscale-light t)
+  (load-theme 'base16-grayscale-dark t)
   :custom-face
   (mode-line-inactive ((t (:box t)))))
 #+end_src
