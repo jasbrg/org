@@ -216,6 +216,10 @@
   :config
   (use-package vertico-directory)
   (use-package vertico-mouse
+    :init
+    (defun pixel-scroll-precision-mode-off ()
+      (pixel-scroll-precision-mode -1))
+    :hook ((vertico-mouse-mode) . pixel-scroll-precision-mode-off)
     :config (vertico-mouse-mode))
   (use-package vertico-quick
     ;; I don't get it?
