@@ -427,9 +427,7 @@
 
 #+begin_src emacs-lisp
 (use-package ghub
-  :straight t
-  :config
-  (ghub-request "GET" "/user"))
+  :straight t)
 
 (use-package magit
   :straight t
