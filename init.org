@@ -48,7 +48,7 @@
   (defun my/src () (interactive) (find-file "~/src/"))
   (defalias 'yes-or-no-p 'y-or-n-p)
   (setq inhibit-startup-screen t)
-  (setq enable-recursive-minibuffers)
+  (setq enable-recursive-minibuffers t)
   :custom
   (auto-save-file-name-transforms '((".*" "~/.emacs.d/cache/autosave/" t)))
   (backup-directory-alist '(("." . "~/.emacs.d/cache/backup/")))
