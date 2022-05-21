@@ -19,7 +19,7 @@
 (load (file-truename "~/.emacs.d/bootstrap-straight.el"))
 
 (straight-use-package 'straight)
-(straight-use-package 'use-package)
+(Straight-use-package 'use-package)
 
 (load custom-file)
 
