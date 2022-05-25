@@ -1,6 +1,9 @@
 #+startup: overview
 #+todo: TODO(t) | DONE(d)
 #+todo: | CANCELLED(c)
+* TODO org-mode eldoc
+things like showing current heading of subtree or column name in table
+would be helpful in some cases
 * TODO Cider show last exception
 
 The thing =*e= gets the last exception in the clojure repl. wouldn't
