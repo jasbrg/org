@@ -726,24 +726,6 @@
 
 (use-package orgit-forge
   :straight t)
-
-;;; Org-Roam-Agenda
-(use-package emacs
-  :config
-  (add-to-list 'org-tags-exclude-from-inheritance "project")
-  (defun my/project-note-p ()
-    "Return non-nil if current buffer has any todo entry.
-
-TODO entries marked as done are ignored, meaning the this
-function returns nil if current buffer contains only completed
-tasks."
-  (org-element-map
-       (org-element-parse-buffer 'headline)
-       'headline
-     (lambda (h)
-       (eq (org-element-property :todo-type h)
-           'todo))
-     nil 'first-match)))
 #+end_src
 
 *** Shell & Environment
