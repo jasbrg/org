@@ -236,7 +236,7 @@
   :bind (:map minibuffer-local-map
          ("M-A" . marginalia-cycle))
   :custom
-  (marginalia-field-width 80)
+  (marginalia-field-width 40)
   (marginalia-align 'left))
 
 (use-package orderless
