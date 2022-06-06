@@ -741,6 +741,13 @@
   :straight t)
 #+end_src
 
+*** Web
+
+#+begin_src emacs-lisp
+(use-package mediawiki
+  :straight t)
+#+end_src
+
 *** Programming
 
 #+begin_src emacs-lisp
