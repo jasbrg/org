@@ -745,7 +745,9 @@
 
 #+begin_src emacs-lisp
 (use-package mediawiki
-  :straight t)
+  :straight t
+  :custom
+  (mediawiki-site "Wikipedia"))
 #+end_src
 
 *** Programming
