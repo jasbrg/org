@@ -211,13 +211,13 @@
   :bind (("M-x" . 'execute-extended-command)
          ("C-x C-f" . 'find-file))
   :init
-  ;; (use-package vertico-directory)
-  ;; (use-package vertico-quick
-  ;;   ;; I don't get it?
-  ;;   :bind (("C-c q i" . vertico-quick-insert)
-  ;;          ("C-c q q" . vertico-quick-exit)))
-  (vertico-mode)
-  (add-to-list 'load-path "~/.emacs.d/straight/repos/vertico/extensions/"))
+  (add-to-list 'load-path "~/.emacs.d/straight/repos/vertico/extensions/")
+  (use-package vertico-directory)
+  (use-package vertico-quick
+    ;; I don't get it?
+    :bind (("C-c q i" . vertico-quick-insert)
+           ("C-c q q" . vertico-quick-exit)))
+  (vertico-mode))
 
 (use-package vertico-mouse
     :init
